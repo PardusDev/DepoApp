@@ -12,13 +12,15 @@ namespace DepoApp.DAL.Context
     public class DepoDbContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
-        public DbSet<StorageItem> StorageItems { get; set; }
+
         public DbSet<Storage> Storages { get; set; }
+        public DbSet<StorageItem> StorageItems { get; set; }
+        
 
         public string DbPath { get; }
 
         //string databaseName = ConfigurationManager.AppSettings["databaseName"];
-        string databaseName = "Depo5.db";
+        string databaseName = "Depo8.db";
         
         
 
@@ -28,11 +30,11 @@ namespace DepoApp.DAL.Context
             var path = Environment.GetFolderPath(folder);
             DbPath = System.IO.Path.Join(path, databaseName);
             Database.EnsureCreated();
+            //Database.Migrate();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
             optionsBuilder.UseSqlite("DataSource="+databaseName);
         }
     }

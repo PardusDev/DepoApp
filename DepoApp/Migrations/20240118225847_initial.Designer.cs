@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DepoApp.Migrations
 {
     [DbContext(typeof(DepoDbContext))]
-    [Migration("20240118220422_initial")]
+    [Migration("20240118225847_initial")]
     partial class initial
     {
         /// <inheritdoc />

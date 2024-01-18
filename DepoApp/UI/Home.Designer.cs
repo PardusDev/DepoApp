@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            productBindingSource = new BindingSource(components);
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             button3 = new Button();
@@ -39,6 +37,7 @@
             idStorage = new DataGridViewTextBoxColumn();
             productNameStorage = new DataGridViewTextBoxColumn();
             countProductStorage = new DataGridViewTextBoxColumn();
+            storageItemStorageName = new DataGridViewTextBoxColumn();
             tabPage2 = new TabPage();
             button1 = new Button();
             dataGridViewProducts = new DataGridView();
@@ -46,39 +45,33 @@
             name = new DataGridViewTextBoxColumn();
             btnAddNewProduct = new Button();
             tabPage3 = new TabPage();
+            label3 = new Label();
+            label1 = new Label();
+            panel1 = new Panel();
+            label2 = new Label();
+            btnUpdateStorage = new Button();
+            txtBxStorageUpdate = new TextBox();
             btnAddNewStorage = new Button();
             txtBxStorageName = new TextBox();
             dataGridViewStorages = new DataGridView();
             storageId = new DataGridViewTextBoxColumn();
             storageName = new DataGridViewTextBoxColumn();
-            productBindingSource1 = new BindingSource(components);
-            panel1 = new Panel();
-            label1 = new Label();
-            txtBxStorageUpdate = new TextBox();
-            btnUpdateStorage = new Button();
-            label2 = new Label();
-            label3 = new Label();
-            ((System.ComponentModel.ISupportInitialize)productBindingSource).BeginInit();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewStorage).BeginInit();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).BeginInit();
             tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewStorages).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)productBindingSource1).BeginInit();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewStorages).BeginInit();
             SuspendLayout();
-            // 
-            // productBindingSource
-            // 
-            productBindingSource.DataSource = typeof(DAL.Models.Product);
             // 
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
+            tabControl1.ItemSize = new Size(68, 20);
             tabControl1.Location = new Point(0, 1);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -137,7 +130,7 @@
             dataGridViewStorage.AllowUserToDeleteRows = false;
             dataGridViewStorage.AllowUserToOrderColumns = true;
             dataGridViewStorage.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewStorage.Columns.AddRange(new DataGridViewColumn[] { idStorage, productNameStorage, countProductStorage });
+            dataGridViewStorage.Columns.AddRange(new DataGridViewColumn[] { idStorage, productNameStorage, countProductStorage, storageItemStorageName });
             dataGridViewStorage.Location = new Point(0, 6);
             dataGridViewStorage.Name = "dataGridViewStorage";
             dataGridViewStorage.ReadOnly = true;
@@ -162,6 +155,12 @@
             countProductStorage.HeaderText = "Ürün Sayısı";
             countProductStorage.Name = "countProductStorage";
             countProductStorage.ReadOnly = true;
+            // 
+            // storageItemStorageName
+            // 
+            storageItemStorageName.HeaderText = "Depo";
+            storageItemStorageName.Name = "storageItemStorageName";
+            storageItemStorageName.ReadOnly = true;
             // 
             // tabPage2
             // 
@@ -238,6 +237,60 @@
             tabPage3.Text = "Depolar";
             tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(364, 13);
+            label3.Name = "label3";
+            label3.Size = new Size(59, 15);
+            label3.TabIndex = 7;
+            label3.Text = "Depo Adı:";
+            // 
+            // label1
+            // 
+            label1.Location = new Point(364, 399);
+            label1.Name = "label1";
+            label1.Size = new Size(408, 20);
+            label1.TabIndex = 4;
+            label1.Text = "Lütfen bir işlem yapmak için listeden seçim yapınız.";
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(btnUpdateStorage);
+            panel1.Controls.Add(txtBxStorageUpdate);
+            panel1.Location = new Point(364, 290);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(408, 91);
+            panel1.TabIndex = 3;
+            panel1.Visible = false;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(4, 10);
+            label2.Name = "label2";
+            label2.Size = new Size(59, 15);
+            label2.TabIndex = 6;
+            label2.Text = "Depo Adı:";
+            // 
+            // btnUpdateStorage
+            // 
+            btnUpdateStorage.Location = new Point(275, 57);
+            btnUpdateStorage.Name = "btnUpdateStorage";
+            btnUpdateStorage.Size = new Size(130, 31);
+            btnUpdateStorage.TabIndex = 5;
+            btnUpdateStorage.Text = "Depoyu Güncelle";
+            btnUpdateStorage.UseVisualStyleBackColor = true;
+            btnUpdateStorage.Click += btnUpdateStorage_Click;
+            // 
+            // txtBxStorageUpdate
+            // 
+            txtBxStorageUpdate.Location = new Point(4, 28);
+            txtBxStorageUpdate.Name = "txtBxStorageUpdate";
+            txtBxStorageUpdate.Size = new Size(401, 23);
+            txtBxStorageUpdate.TabIndex = 0;
+            // 
             // btnAddNewStorage
             // 
             btnAddNewStorage.Location = new Point(639, 60);
@@ -285,63 +338,6 @@
             storageName.Name = "storageName";
             storageName.ReadOnly = true;
             // 
-            // productBindingSource1
-            // 
-            productBindingSource1.DataSource = typeof(DAL.Models.Product);
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(btnUpdateStorage);
-            panel1.Controls.Add(txtBxStorageUpdate);
-            panel1.Location = new Point(364, 290);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(408, 91);
-            panel1.TabIndex = 3;
-            panel1.Visible = false;
-            // 
-            // label1
-            // 
-            label1.Location = new Point(364, 399);
-            label1.Name = "label1";
-            label1.Size = new Size(408, 20);
-            label1.TabIndex = 4;
-            label1.Text = "Lütfen bir işlem yapmak için listeden seçim yapınız.";
-            // 
-            // txtBxStorageUpdate
-            // 
-            txtBxStorageUpdate.Location = new Point(4, 28);
-            txtBxStorageUpdate.Name = "txtBxStorageUpdate";
-            txtBxStorageUpdate.Size = new Size(401, 23);
-            txtBxStorageUpdate.TabIndex = 0;
-            // 
-            // btnUpdateStorage
-            // 
-            btnUpdateStorage.Location = new Point(275, 57);
-            btnUpdateStorage.Name = "btnUpdateStorage";
-            btnUpdateStorage.Size = new Size(130, 31);
-            btnUpdateStorage.TabIndex = 5;
-            btnUpdateStorage.Text = "Depoyu Güncelle";
-            btnUpdateStorage.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(4, 10);
-            label2.Name = "label2";
-            label2.Size = new Size(59, 15);
-            label2.TabIndex = 6;
-            label2.Text = "Depo Adı:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(364, 13);
-            label3.Name = "label3";
-            label3.Size = new Size(59, 15);
-            label3.TabIndex = 7;
-            label3.Text = "Depo Adı:";
-            // 
             // Home
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -353,9 +349,8 @@
             MinimizeBox = false;
             Name = "Home";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Depo Uygulaması";
+            Text = "Depo";
             Load += Home_Load;
-            ((System.ComponentModel.ISupportInitialize)productBindingSource).EndInit();
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewStorage).EndInit();
@@ -363,22 +358,18 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).EndInit();
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewStorages).EndInit();
-            ((System.ComponentModel.ISupportInitialize)productBindingSource1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewStorages).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private BindingSource productBindingSource;
         private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
         private Button btnAddNewProduct;
         private DataGridView dataGridViewProducts;
-        private BindingSource productBindingSource1;
         private DataGridViewTextBoxColumn id;
         private DataGridViewTextBoxColumn name;
         private DataGridView dataGridViewStorage;
@@ -401,5 +392,6 @@
         private Label label2;
         private Button btnUpdateStorage;
         private Label label3;
+        private DataGridViewTextBoxColumn storageItemStorageName;
     }
 }

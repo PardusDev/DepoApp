@@ -35,6 +35,8 @@
             numericUpDown1 = new NumericUpDown();
             label1 = new Label();
             label2 = new Label();
+            cmbBxStorages = new ComboBox();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)productBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
@@ -42,7 +44,7 @@
             // cmbBxProducts
             // 
             cmbBxProducts.FormattingEnabled = true;
-            cmbBxProducts.Location = new Point(80, 31);
+            cmbBxProducts.Location = new Point(93, 31);
             cmbBxProducts.Name = "cmbBxProducts";
             cmbBxProducts.Size = new Size(183, 23);
             cmbBxProducts.TabIndex = 0;
@@ -63,7 +65,7 @@
             // 
             // numericUpDown1
             // 
-            numericUpDown1.Location = new Point(80, 75);
+            numericUpDown1.Location = new Point(93, 87);
             numericUpDown1.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(120, 23);
@@ -72,7 +74,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(24, 34);
+            label1.Location = new Point(49, 34);
             label1.Name = "label1";
             label1.Size = new Size(36, 15);
             label1.TabIndex = 3;
@@ -81,22 +83,42 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(24, 77);
+            label2.Location = new Point(49, 89);
             label2.Name = "label2";
-            label2.Size = new Size(32, 15);
+            label2.Size = new Size(35, 15);
             label2.TabIndex = 4;
-            label2.Text = "Adet";
+            label2.Text = "Adet:";
+            // 
+            // cmbBxStorages
+            // 
+            cmbBxStorages.FormattingEnabled = true;
+            cmbBxStorages.Location = new Point(93, 60);
+            cmbBxStorages.Name = "cmbBxStorages";
+            cmbBxStorages.Size = new Size(183, 23);
+            cmbBxStorages.TabIndex = 5;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(12, 63);
+            label3.Name = "label3";
+            label3.Size = new Size(73, 15);
+            label3.TabIndex = 6;
+            label3.Text = "Hangi Depo:";
             // 
             // AddProductToStorage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(333, 213);
+            Controls.Add(label3);
+            Controls.Add(cmbBxStorages);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(numericUpDown1);
             Controls.Add(button1);
             Controls.Add(cmbBxProducts);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "AddProductToStorage";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Depoya Ürün Ekle";
@@ -115,5 +137,7 @@
         private NumericUpDown numericUpDown1;
         private Label label1;
         private Label label2;
+        private ComboBox cmbBxStorages;
+        private Label label3;
     }
 }

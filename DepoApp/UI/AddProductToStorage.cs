@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace DepoApp.UI
         
         StorageItemManager _storageItemManager = new StorageItemManager();
         ProductManager _productManager = new ProductManager();
+        StorageManager _storageManager = new StorageManager();
         DepoDbContext db = new DepoDbContext();
         Home home;
         public AddProductToStorage(Home home)
@@ -35,6 +37,12 @@ namespace DepoApp.UI
             cmbBxProducts.DisplayMember = "name";
 
             cmbBxProducts.DataSource = products;
+
+            var storages = _storageManager.GetAll();
+            cmbBxStorages.ValueMember = "id";
+            cmbBxStorages.DisplayMember = "name";
+
+            cmbBxStorages.DataSource = storages;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,10 +50,32 @@ namespace DepoApp.UI
             StorageItem storageItem = new StorageItem();
             //storageItem.product = _productManager.GetAll().Find(cmbBxProducts.SelectedValue);
             storageItem.product = db.Products.Find(cmbBxProducts.SelectedValue);
+            storageItem.storage = _storageManager.GetAll().Find(s => s.id == (int)cmbBxStorages.SelectedValue);
             storageItem.count = Convert.ToInt32(numericUpDown1.Value);
 
+            // Check product is selected
+            if (storageItem.product == null)
+            {
+                MessageBox.Show("Lütfen bir ürün seçiniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Check storage is selected
+            if (storageItem.storage == null)
+            {
+                MessageBox.Show("Lütfen bir depo seçiniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Check product count is greater or equal to 0
+            if (storageItem.count < 0)
+            {
+                MessageBox.Show("Lütfen ürün adedini 0'dan küçük olamaz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             // Check if product already exists in storage
-            StorageItem existingStorageItem = _storageItemManager.GetAll().FirstOrDefault(item => item.product == storageItem.product);
+            StorageItem existingStorageItem = _storageItemManager.GetAll().FirstOrDefault(item => (item.product == storageItem.product) && (item.storage == storageItem.storage));
 
             if (existingStorageItem != null)
             {
@@ -62,9 +92,12 @@ namespace DepoApp.UI
                 {
                     // Degismeli
                     db.StorageItems.Add(storageItem);
+                    //db.Products.Attach(storageItem.product);
+                    db.Storages.Attach(storageItem.storage);
                     if (db.SaveChanges() > 0)
                     {
                         MessageBox.Show("Ürün başarıyla depoya eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        home.updateStorageItemDataGridView();
                     }
                 }
                 catch (Exception exception)

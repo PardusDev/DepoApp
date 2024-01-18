@@ -3,6 +3,7 @@ using DepoApp.DAL.Manager;
 using DepoApp.DAL.Models;
 using DepoApp.UI;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace DepoApp
 {
@@ -12,6 +13,8 @@ namespace DepoApp
         ProductManager _productManager = new ProductManager();
         StorageManager _storageManager = new StorageManager();
         StorageItemManager _storageItemManager = new StorageItemManager();
+
+        int selectedStorageID = 0;
 
         public Home()
         {
@@ -118,11 +121,58 @@ namespace DepoApp
 
         private void dataGridViewStorages_SelectionChanged(object sender, EventArgs e)
         {
+            if (dataGridViewStorages.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            // Show panel and setting other values
+            panel1.Visible = true;
+            txtBxStorageUpdate.Text = dataGridViewStorages.SelectedRows[0].Cells[1].Value.ToString();
+            selectedStorageID = Convert.ToInt32(dataGridViewStorages.SelectedRows[0].Cells[0].Value);
+        }
 
+        private void btnUpdateStorage_Click(object sender, EventArgs e)
+        {
+            // Check if the storage id is valid
+            if (selectedStorageID != 0)
+            {
+                txtBxStorageUpdate.Text = txtBxStorageUpdate.Text.Trim();
+                // Check if the storage name is empty
+                if (string.IsNullOrEmpty(txtBxStorageUpdate.Text))
+                {
+                    MessageBox.Show("Lütfen depo adýný giriniz.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Check if the storage name is already exists
+                if (_storageManager.GetAll().Where(s => s.name == txtBxStorageUpdate.Text).FirstOrDefault() != null)
+                {
+                    MessageBox.Show("Bu depo adý zaten mevcut.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                Storage storage = new Storage()
+                {
+                    id = selectedStorageID,
+                    name = txtBxStorageUpdate.Text
+                };
+                try
+                {
+                    if (_storageManager.Update(storage))
+                    {
+                        MessageBox.Show("Depo baþarýyla güncellendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        updateStoragesDataGridView();
+                    }
+                } catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message, exception.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
         #endregion
 
-        // Storage-Item Area
+        #region StorageItem Area
         private void btnAddNewProductToStorage_Click(object sender, EventArgs e)
         {
             AddProductToStorage addProductToStorage = new AddProductToStorage(this);
@@ -178,7 +228,7 @@ namespace DepoApp
                 }
             }
         }
-
+        #endregion
 
         #region UTILITY METHODS
         public StorageItem getSelectedStorageItem()
@@ -201,32 +251,37 @@ namespace DepoApp
             }
         }
 
-        public void updateStorageItemDataGridView()
-        {
-            dataGridViewStorage.Rows.Clear();
-
-            // degismeli manager ile.
-            var storageItems = db.StorageItems;
-
-            foreach (var storageitem in storageItems)
-            {
-                dataGridViewStorage.Rows.Add(storageitem.id, storageitem.product.name, storageitem.count);
-            }
-        }
-
         public void updateStoragesDataGridView()
         {
             dataGridViewStorages.Rows.Clear();
 
             // degismeli manager ile.
-            var storages = db.Storages;
+            var storages = _storageManager.GetAll();
 
             foreach (var storage in storages)
             {
                 dataGridViewStorages.Rows.Add(storage.id, storage.name);
             }
         }
+
+        public void updateStorageItemDataGridView()
+        {
+            dataGridViewStorage.Rows.Clear();
+
+            using (DepoDbContext db = new DepoDbContext())
+            {
+                var storageItems = db.StorageItems.Include(s => s.product).Include(s => s.storage).ToList();
+
+                foreach (var storageitem in storageItems)
+                {
+                    dataGridViewStorage.Rows.Add(storageitem.id, storageitem.product.name, storageitem.count, storageitem.storage.name);
+                }
+            }
+        }
+
+        
         #endregion
+
 
 
         
