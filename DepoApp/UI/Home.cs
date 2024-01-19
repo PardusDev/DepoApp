@@ -381,6 +381,14 @@ namespace DepoApp
         }
         #endregion
 
+        #region SALE
+        private void button8_Click(object sender, EventArgs e)
+        {
+            AddSale addSale = new AddSale();
+            addSale.ShowDialog();
+        }
+        #endregion
+
         #region UTILITY METHODS
         public StorageItem getSelectedStorageItem()
         {
@@ -457,6 +465,21 @@ namespace DepoApp
             updateCategoriesComboBox();
         }
 
+        public void updateSalesDataGridView()
+        {
+            dataGridViewSales.Rows.Clear();
+
+            using (DepoDbContext db = new DepoDbContext())
+            {
+                var sales = db.Sales.Include(s => s.storageItem).Include(s => s.storageItem.product).Include(s => s.storageItem.storage).ToList();
+
+                foreach (var sale in sales)
+                {
+                    dataGridViewSales.Rows.Add(sale.id, sale.storageItem.product.name, sale.storageItem.storage.name, sale.count + " " + getMeasurementType(sale.storageItem.product.measurementType), sale.price);
+                }
+            }
+        }
+
         public string getMeasurementType(int measurementType)
         {
             if (measurementType == 0)
@@ -515,5 +538,6 @@ namespace DepoApp
         #endregion
 
 
+        
     }
 }

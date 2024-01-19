@@ -16,6 +16,8 @@ namespace DepoApp.DAL.Context
 
         public DbSet<Storage> Storages { get; set; }
         public DbSet<StorageItem> StorageItems { get; set; }
+
+        public DbSet<Sale> Sales { get; set;}
         
 
         public string DbPath { get; }

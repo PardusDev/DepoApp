@@ -29,7 +29,16 @@
         private void InitializeComponent()
         {
             tabControl1 = new TabControl();
+            tabPage5 = new TabPage();
+            button8 = new Button();
+            dataGridViewSales = new DataGridView();
+            saleId = new DataGridViewTextBoxColumn();
+            saleProduct = new DataGridViewTextBoxColumn();
+            saleStorage = new DataGridViewTextBoxColumn();
+            saleCount = new DataGridViewTextBoxColumn();
+            salePrice = new DataGridViewTextBoxColumn();
             tabPage1 = new TabPage();
+            cmbBxCategories = new ComboBox();
             button6 = new Button();
             cmbBxStorages = new ComboBox();
             txtBxSearchProductName = new TextBox();
@@ -51,6 +60,7 @@
             productMeasurement = new DataGridViewTextBoxColumn();
             btnAddNewProduct = new Button();
             tabPage3 = new TabPage();
+            label9 = new Label();
             label3 = new Label();
             label1 = new Label();
             panel1 = new Panel();
@@ -63,6 +73,7 @@
             storageId = new DataGridViewTextBoxColumn();
             storageName = new DataGridViewTextBoxColumn();
             tabPage4 = new TabPage();
+            label8 = new Label();
             label6 = new Label();
             panel2 = new Panel();
             button5 = new Button();
@@ -74,8 +85,9 @@
             dataGridViewCategories = new DataGridView();
             categoryId = new DataGridViewTextBoxColumn();
             categoryName = new DataGridViewTextBoxColumn();
-            cmbBxCategories = new ComboBox();
             tabControl1.SuspendLayout();
+            tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewSales).BeginInit();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewStorage).BeginInit();
             tabPage2.SuspendLayout();
@@ -90,6 +102,7 @@
             // 
             // tabControl1
             // 
+            tabControl1.Controls.Add(tabPage5);
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
@@ -100,6 +113,71 @@
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(797, 448);
             tabControl1.TabIndex = 1;
+            // 
+            // tabPage5
+            // 
+            tabPage5.Controls.Add(button8);
+            tabPage5.Controls.Add(dataGridViewSales);
+            tabPage5.Location = new Point(4, 24);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Size = new Size(789, 420);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "Satışlar";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // button8
+            // 
+            button8.Location = new Point(477, 375);
+            button8.Name = "button8";
+            button8.Size = new Size(121, 40);
+            button8.TabIndex = 2;
+            button8.Text = "Yeni Satış Gir";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += button8_Click;
+            // 
+            // dataGridViewSales
+            // 
+            dataGridViewSales.AllowUserToAddRows = false;
+            dataGridViewSales.AllowUserToDeleteRows = false;
+            dataGridViewSales.AllowUserToOrderColumns = true;
+            dataGridViewSales.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewSales.Columns.AddRange(new DataGridViewColumn[] { saleId, saleProduct, saleStorage, saleCount, salePrice });
+            dataGridViewSales.Location = new Point(0, 36);
+            dataGridViewSales.Name = "dataGridViewSales";
+            dataGridViewSales.ReadOnly = true;
+            dataGridViewSales.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewSales.Size = new Size(789, 333);
+            dataGridViewSales.TabIndex = 0;
+            // 
+            // saleId
+            // 
+            saleId.HeaderText = "id";
+            saleId.Name = "saleId";
+            saleId.ReadOnly = true;
+            // 
+            // saleProduct
+            // 
+            saleProduct.HeaderText = "Ürün Adı";
+            saleProduct.Name = "saleProduct";
+            saleProduct.ReadOnly = true;
+            // 
+            // saleStorage
+            // 
+            saleStorage.HeaderText = "Depo";
+            saleStorage.Name = "saleStorage";
+            saleStorage.ReadOnly = true;
+            // 
+            // saleCount
+            // 
+            saleCount.HeaderText = "Adet/Kg/Lt";
+            saleCount.Name = "saleCount";
+            saleCount.ReadOnly = true;
+            // 
+            // salePrice
+            // 
+            salePrice.HeaderText = "Toplam Fiyat";
+            salePrice.Name = "salePrice";
+            salePrice.ReadOnly = true;
             // 
             // tabPage1
             // 
@@ -119,6 +197,15 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Depo";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // cmbBxCategories
+            // 
+            cmbBxCategories.FormattingEnabled = true;
+            cmbBxCategories.Items.AddRange(new object[] { "Tüm Depolar" });
+            cmbBxCategories.Location = new Point(421, 9);
+            cmbBxCategories.Name = "cmbBxCategories";
+            cmbBxCategories.Size = new Size(140, 23);
+            cmbBxCategories.TabIndex = 8;
             // 
             // button6
             // 
@@ -299,6 +386,7 @@
             // 
             // tabPage3
             // 
+            tabPage3.Controls.Add(label9);
             tabPage3.Controls.Add(label3);
             tabPage3.Controls.Add(label1);
             tabPage3.Controls.Add(panel1);
@@ -312,6 +400,15 @@
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Depolar";
             tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(368, 272);
+            label9.Name = "label9";
+            label9.Size = new Size(53, 15);
+            label9.TabIndex = 8;
+            label9.Text = "Güncelle";
             // 
             // label3
             // 
@@ -416,6 +513,7 @@
             // 
             // tabPage4
             // 
+            tabPage4.Controls.Add(label8);
             tabPage4.Controls.Add(label6);
             tabPage4.Controls.Add(panel2);
             tabPage4.Controls.Add(button4);
@@ -428,6 +526,15 @@
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Kategoriler";
             tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(354, 282);
+            label8.Name = "label8";
+            label8.Size = new Size(53, 15);
+            label8.TabIndex = 6;
+            label8.Text = "Güncelle";
             // 
             // label6
             // 
@@ -528,15 +635,6 @@
             categoryName.Name = "categoryName";
             categoryName.ReadOnly = true;
             // 
-            // cmbBxCategories
-            // 
-            cmbBxCategories.FormattingEnabled = true;
-            cmbBxCategories.Items.AddRange(new object[] { "Tüm Depolar" });
-            cmbBxCategories.Location = new Point(421, 9);
-            cmbBxCategories.Name = "cmbBxCategories";
-            cmbBxCategories.Size = new Size(140, 23);
-            cmbBxCategories.TabIndex = 8;
-            // 
             // Home
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -551,6 +649,8 @@
             Text = "Depo";
             Load += Home_Load;
             tabControl1.ResumeLayout(false);
+            tabPage5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewSales).EndInit();
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewStorage).EndInit();
@@ -617,5 +717,15 @@
         private Button button6;
         private ComboBox cmbBxStorages;
         private ComboBox cmbBxCategories;
+        private Label label9;
+        private Label label8;
+        private TabPage tabPage5;
+        private DataGridView dataGridViewSales;
+        private DataGridViewTextBoxColumn saleId;
+        private DataGridViewTextBoxColumn saleProduct;
+        private DataGridViewTextBoxColumn saleStorage;
+        private DataGridViewTextBoxColumn saleCount;
+        private DataGridViewTextBoxColumn salePrice;
+        private Button button8;
     }
 }
