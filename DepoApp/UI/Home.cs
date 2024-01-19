@@ -35,6 +35,8 @@ namespace DepoApp
             updateCategoriesDataGridView();
         }
 
+        #region PRODUCT
+
         private void btnAddNewProduct_Click(object sender, EventArgs e)
         {
             AddProduct addProduct = new AddProduct();
@@ -76,6 +78,7 @@ namespace DepoApp
                 MessageBox.Show(exception.Message, exception.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        #endregion
 
 
         #region STORAGE
@@ -346,6 +349,36 @@ namespace DepoApp
                 }
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            // Attention: Search term is lowercased
+            string searchTerm = (txtBxSearchProductName.Text.Trim()).ToLower();
+            using (DepoDbContext db = new DepoDbContext())
+            {
+                var storageItems = db.StorageItems.Include(s => s.product).Include(s => s.storage).Include(s => s.product.category).ToList();
+                if (searchTerm != "")
+                {
+                    storageItems = storageItems.Where(s => s.product.name.ToLower().Contains(searchTerm)).ToList();
+                }
+                if ((int)cmbBxStorages.SelectedValue != -1)
+                {
+                    storageItems = storageItems.Where(s => s.storage.id == (int)cmbBxStorages.SelectedValue).ToList();
+                }
+                if ((int)cmbBxCategories.SelectedValue != -1)
+                {
+                    storageItems = storageItems.Where(s => s.product.category.id == (int)cmbBxCategories.SelectedValue).ToList();
+                }
+
+
+                dataGridViewStorage.Rows.Clear();
+
+                foreach (var storageitem in storageItems)
+                {
+                    dataGridViewStorage.Rows.Add(storageitem.id, storageitem.product.name, storageitem.count + " " + getMeasurementType(storageitem.product.measurementType), storageitem.storage.name);
+                }
+            }
+        }
         #endregion
 
         #region UTILITY METHODS
@@ -387,7 +420,9 @@ namespace DepoApp
                 {
                     dataGridViewStorages.Rows.Add(storage.id, storage.name);
                 }
+
             }
+            updateStoragesComboBox();
         }
 
         public void updateStorageItemDataGridView()
@@ -418,6 +453,8 @@ namespace DepoApp
                     dataGridViewCategories.Rows.Add(category.id, category.name);
                 }
             }
+
+            updateCategoriesComboBox();
         }
 
         public string getMeasurementType(int measurementType)
@@ -439,13 +476,44 @@ namespace DepoApp
                 return "N/A";
             }
         }
+
+        public void updateStoragesComboBox()
+        {
+            List<Storage> storages = new List<Storage>();
+            storages.Add(new Storage()
+            {
+                id = -1,
+                name = "Tüm Depolar"
+            });
+            using (DepoDbContext db = new DepoDbContext())
+            {
+                storages.AddRange(db.Storages.OrderBy(s => s.id).ToList());
+
+                cmbBxStorages.DataSource = storages;
+                cmbBxStorages.DisplayMember = "name";
+                cmbBxStorages.ValueMember = "id";
+            }
+        }
+
+        public void updateCategoriesComboBox()
+        {
+            List<Category> categories = new List<Category>();
+            categories.Add(new Category()
+            {
+                id = -1,
+                name = "Tüm Kategoriler"
+            });
+            using (DepoDbContext db = new DepoDbContext())
+            {
+                categories.AddRange(db.Categories.OrderBy(c => c.id).ToList());
+
+                cmbBxCategories.DataSource = categories;
+                cmbBxCategories.DisplayMember = "name";
+                cmbBxCategories.ValueMember = "id";
+            }
+        }
         #endregion
 
 
-
-
-
-
-        
     }
 }

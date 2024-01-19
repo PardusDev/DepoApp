@@ -30,10 +30,18 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            button6 = new Button();
+            cmbBxStorages = new ComboBox();
+            txtBxSearchProductName = new TextBox();
+            label7 = new Label();
             button3 = new Button();
             button2 = new Button();
             btnAddNewProductToStorage = new Button();
             dataGridViewStorage = new DataGridView();
+            idStorage = new DataGridViewTextBoxColumn();
+            productNameStorage = new DataGridViewTextBoxColumn();
+            countProductStorage = new DataGridViewTextBoxColumn();
+            storageItemStorageName = new DataGridViewTextBoxColumn();
             tabPage2 = new TabPage();
             button1 = new Button();
             dataGridViewProducts = new DataGridView();
@@ -66,10 +74,7 @@
             dataGridViewCategories = new DataGridView();
             categoryId = new DataGridViewTextBoxColumn();
             categoryName = new DataGridViewTextBoxColumn();
-            idStorage = new DataGridViewTextBoxColumn();
-            productNameStorage = new DataGridViewTextBoxColumn();
-            countProductStorage = new DataGridViewTextBoxColumn();
-            storageItemStorageName = new DataGridViewTextBoxColumn();
+            cmbBxCategories = new ComboBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewStorage).BeginInit();
@@ -98,6 +103,11 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(cmbBxCategories);
+            tabPage1.Controls.Add(button6);
+            tabPage1.Controls.Add(cmbBxStorages);
+            tabPage1.Controls.Add(txtBxSearchProductName);
+            tabPage1.Controls.Add(label7);
             tabPage1.Controls.Add(button3);
             tabPage1.Controls.Add(button2);
             tabPage1.Controls.Add(btnAddNewProductToStorage);
@@ -109,6 +119,42 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Depo";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            button6.Location = new Point(591, 9);
+            button6.Name = "button6";
+            button6.Size = new Size(89, 23);
+            button6.TabIndex = 7;
+            button6.Text = "Arama Yap";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
+            // cmbBxStorages
+            // 
+            cmbBxStorages.FormattingEnabled = true;
+            cmbBxStorages.Items.AddRange(new object[] { "Tüm Depolar" });
+            cmbBxStorages.Location = new Point(263, 9);
+            cmbBxStorages.Name = "cmbBxStorages";
+            cmbBxStorages.Size = new Size(140, 23);
+            cmbBxStorages.TabIndex = 6;
+            // 
+            // txtBxSearchProductName
+            // 
+            txtBxSearchProductName.Location = new Point(73, 9);
+            txtBxSearchProductName.Name = "txtBxSearchProductName";
+            txtBxSearchProductName.PlaceholderText = "Ürün Adı";
+            txtBxSearchProductName.Size = new Size(170, 23);
+            txtBxSearchProductName.TabIndex = 5;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(0, 12);
+            label7.Name = "label7";
+            label7.Size = new Size(67, 15);
+            label7.TabIndex = 4;
+            label7.Text = "Arama Yap:";
             // 
             // button3
             // 
@@ -149,12 +195,36 @@
             dataGridViewStorage.AllowUserToOrderColumns = true;
             dataGridViewStorage.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewStorage.Columns.AddRange(new DataGridViewColumn[] { idStorage, productNameStorage, countProductStorage, storageItemStorageName });
-            dataGridViewStorage.Location = new Point(0, 6);
+            dataGridViewStorage.Location = new Point(0, 36);
             dataGridViewStorage.Name = "dataGridViewStorage";
             dataGridViewStorage.ReadOnly = true;
             dataGridViewStorage.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewStorage.Size = new Size(789, 363);
+            dataGridViewStorage.Size = new Size(789, 333);
             dataGridViewStorage.TabIndex = 0;
+            // 
+            // idStorage
+            // 
+            idStorage.HeaderText = "id";
+            idStorage.Name = "idStorage";
+            idStorage.ReadOnly = true;
+            // 
+            // productNameStorage
+            // 
+            productNameStorage.HeaderText = "Ürün Adı";
+            productNameStorage.Name = "productNameStorage";
+            productNameStorage.ReadOnly = true;
+            // 
+            // countProductStorage
+            // 
+            countProductStorage.HeaderText = "Ürün Stoğu";
+            countProductStorage.Name = "countProductStorage";
+            countProductStorage.ReadOnly = true;
+            // 
+            // storageItemStorageName
+            // 
+            storageItemStorageName.HeaderText = "Depo";
+            storageItemStorageName.Name = "storageItemStorageName";
+            storageItemStorageName.ReadOnly = true;
             // 
             // tabPage2
             // 
@@ -458,29 +528,14 @@
             categoryName.Name = "categoryName";
             categoryName.ReadOnly = true;
             // 
-            // idStorage
+            // cmbBxCategories
             // 
-            idStorage.HeaderText = "id";
-            idStorage.Name = "idStorage";
-            idStorage.ReadOnly = true;
-            // 
-            // productNameStorage
-            // 
-            productNameStorage.HeaderText = "Ürün Adı";
-            productNameStorage.Name = "productNameStorage";
-            productNameStorage.ReadOnly = true;
-            // 
-            // countProductStorage
-            // 
-            countProductStorage.HeaderText = "Ürün Stoğu";
-            countProductStorage.Name = "countProductStorage";
-            countProductStorage.ReadOnly = true;
-            // 
-            // storageItemStorageName
-            // 
-            storageItemStorageName.HeaderText = "Depo";
-            storageItemStorageName.Name = "storageItemStorageName";
-            storageItemStorageName.ReadOnly = true;
+            cmbBxCategories.FormattingEnabled = true;
+            cmbBxCategories.Items.AddRange(new object[] { "Tüm Depolar" });
+            cmbBxCategories.Location = new Point(421, 9);
+            cmbBxCategories.Name = "cmbBxCategories";
+            cmbBxCategories.Size = new Size(140, 23);
+            cmbBxCategories.TabIndex = 8;
             // 
             // Home
             // 
@@ -497,6 +552,7 @@
             Load += Home_Load;
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewStorage).EndInit();
             tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).EndInit();
@@ -556,5 +612,10 @@
         private DataGridViewTextBoxColumn productNameStorage;
         private DataGridViewTextBoxColumn countProductStorage;
         private DataGridViewTextBoxColumn storageItemStorageName;
+        private TextBox txtBxSearchProductName;
+        private Label label7;
+        private Button button6;
+        private ComboBox cmbBxStorages;
+        private ComboBox cmbBxCategories;
     }
 }
