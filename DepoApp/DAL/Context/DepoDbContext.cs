@@ -11,6 +11,7 @@ namespace DepoApp.DAL.Context
 {
     public class DepoDbContext : DbContext
     {
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
 
         public DbSet<Storage> Storages { get; set; }
@@ -20,7 +21,7 @@ namespace DepoApp.DAL.Context
         public string DbPath { get; }
 
         //string databaseName = ConfigurationManager.AppSettings["databaseName"];
-        string databaseName = "Depo8.db";
+        string databaseName = "Depo10.db";
         
         
 

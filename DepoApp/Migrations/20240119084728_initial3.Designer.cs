@@ -2,6 +2,7 @@
 using DepoApp.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DepoApp.Migrations
 {
     [DbContext(typeof(DepoDbContext))]
-    partial class DepoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240119084728_initial3")]
+    partial class initial3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
@@ -37,16 +40,11 @@ namespace DepoApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("categoryid")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("id");
-
-                    b.HasIndex("categoryid");
 
                     b.ToTable("Products");
                 });
@@ -88,17 +86,6 @@ namespace DepoApp.Migrations
                     b.HasIndex("storageid");
 
                     b.ToTable("StorageItems");
-                });
-
-            modelBuilder.Entity("DepoApp.DAL.Models.Product", b =>
-                {
-                    b.HasOne("DepoApp.DAL.Models.Category", "category")
-                        .WithMany()
-                        .HasForeignKey("categoryid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("category");
                 });
 
             modelBuilder.Entity("DepoApp.DAL.Models.StorageItem", b =>

@@ -15,6 +15,7 @@ namespace DepoApp
         StorageItemManager _storageItemManager = new StorageItemManager();
 
         int selectedStorageID = 0;
+        int selectedCategoryID = 0;
 
         public Home()
         {
@@ -30,6 +31,8 @@ namespace DepoApp
             updateStorageItemDataGridView();
 
             updateStoragesDataGridView();
+
+            updateCategoriesDataGridView();
         }
 
         private void btnAddNewProduct_Click(object sender, EventArgs e)
@@ -164,7 +167,116 @@ namespace DepoApp
 
                         updateStoragesDataGridView();
                     }
-                } catch (Exception exception)
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message, exception.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        #endregion
+
+        #region CATEGORY
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            txtBxCategoryNew.Text = txtBxCategoryNew.Text.Trim();
+
+            // Check if the category name is valid
+            if (string.IsNullOrEmpty(txtBxCategoryNew.Text))
+            {
+                MessageBox.Show("Lütfen kategori adýný giriniz.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Check if the category name is already exists
+            if (db.Categories.Where(c => c.name == txtBxCategoryNew.Text).FirstOrDefault() != null)
+            {
+                MessageBox.Show("Bu kategori adý zaten mevcut.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Category category = new Category()
+            {
+                name = txtBxCategoryNew.Text
+            };
+
+            try
+            {
+                db.Categories.Add(category);
+
+                if (db.SaveChanges() > 0)
+                {
+                    MessageBox.Show("Kategori baþarýyla eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    updateCategoriesDataGridView();
+                }
+                else
+                {
+                    MessageBox.Show("Kategori eklenirken bir hata oluþtu.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, exception.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void dataGridViewCategories_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridViewCategories.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            // Show panel and setting other values
+            panel2.Visible = true;
+            txtBxCategoryUpdate.Text = dataGridViewCategories.SelectedRows[0].Cells[1].Value.ToString();
+            selectedCategoryID = Convert.ToInt32(dataGridViewCategories.SelectedRows[0].Cells[0].Value);
+        }
+
+        // Update Category Button
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (selectedCategoryID != 0)
+            {
+                txtBxCategoryUpdate.Text = txtBxCategoryUpdate.Text.Trim();
+
+                // Check if the category name is valid
+                if (string.IsNullOrEmpty(txtBxCategoryUpdate.Text))
+                {
+                    MessageBox.Show("Lütfen kategori adýný giriniz.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Check if the category name is already exists
+                if (db.Categories.Where(c => c.name == txtBxCategoryUpdate.Text).FirstOrDefault() != null)
+                {
+                    MessageBox.Show("Bu kategori adý zaten mevcut.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                Category category = new Category()
+                {
+                    id = selectedCategoryID,
+                    name = txtBxCategoryUpdate.Text
+                };
+
+                try
+                {
+                    db.Categories.Update(category);
+
+                    if (db.SaveChanges() > 0)
+                    {
+                        MessageBox.Show("Kategori baþarýyla güncellendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        updateCategoriesDataGridView();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Kategori güncellenirken bir hata oluþtu.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception exception)
                 {
                     MessageBox.Show(exception.Message, exception.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -185,6 +297,12 @@ namespace DepoApp
 
         private void button2_Click(object sender, EventArgs e)
         {
+            // Check any row is selected
+            if (dataGridViewStorage.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Lütfen bir ürün seçiniz.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             StorageItem selectedStorageItem = getSelectedStorageItem();
             SetNewCount setNewCount = new SetNewCount(selectedStorageItem);
 
@@ -235,6 +353,7 @@ namespace DepoApp
         {
             int selectedStorageItemID = Convert.ToInt32(dataGridViewStorage.SelectedRows[0].Cells[0].Value);
             StorageItem selectedStorageItem = db.StorageItems.Find(selectedStorageItemID);
+            db.Entry(selectedStorageItem).Reference(s => s.product).Load();
 
             return selectedStorageItem;
         }
@@ -242,12 +361,16 @@ namespace DepoApp
         public void updateProductsDataGridView()
         {
             dataGridViewProducts.Rows.Clear();
-            var products = db.Products.OrderBy(p => p.id)
-                .ToList();
 
-            foreach (Product product in products)
+            using (DepoDbContext db = new DepoDbContext())
             {
-                dataGridViewProducts.Rows.Add(product.id, product.name);
+                var products = db.Products.Include(p => p.category).OrderBy(p => p.id)
+                    .ToList();
+
+                foreach (var product in products)
+                {
+                    dataGridViewProducts.Rows.Add(product.id, product.name, product.category.name, getMeasurementType(product.measurementType));
+                }
             }
         }
 
@@ -255,12 +378,15 @@ namespace DepoApp
         {
             dataGridViewStorages.Rows.Clear();
 
-            // degismeli manager ile.
-            var storages = _storageManager.GetAll();
-
-            foreach (var storage in storages)
+            using (DepoDbContext db = new DepoDbContext())
             {
-                dataGridViewStorages.Rows.Add(storage.id, storage.name);
+                var storages = db.Storages.OrderBy(s => s.id)
+                    .ToList();
+
+                foreach (var storage in storages)
+                {
+                    dataGridViewStorages.Rows.Add(storage.id, storage.name);
+                }
             }
         }
 
@@ -274,13 +400,49 @@ namespace DepoApp
 
                 foreach (var storageitem in storageItems)
                 {
-                    dataGridViewStorage.Rows.Add(storageitem.id, storageitem.product.name, storageitem.count, storageitem.storage.name);
+                    dataGridViewStorage.Rows.Add(storageitem.id, storageitem.product.name, storageitem.count + " " + getMeasurementType(storageitem.product.measurementType), storageitem.storage.name);
                 }
             }
         }
 
-        
+        public void updateCategoriesDataGridView()
+        {
+            dataGridViewCategories.Rows.Clear();
+
+            using (DepoDbContext db = new DepoDbContext())
+            {
+                var categories = db.Categories.OrderBy(c => c.id);
+
+                foreach (var category in categories)
+                {
+                    dataGridViewCategories.Rows.Add(category.id, category.name);
+                }
+            }
+        }
+
+        public string getMeasurementType(int measurementType)
+        {
+            if (measurementType == 0)
+            {
+                return "Adet";
+            }
+            else if (measurementType == 1)
+            {
+                return "Kg";
+            }
+            else if (measurementType == 2)
+            {
+                return "Lt";
+            }
+            else
+            {
+                return "N/A";
+            }
+        }
         #endregion
+
+
+
 
 
 

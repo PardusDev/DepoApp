@@ -17,12 +17,16 @@ namespace DepoApp.UI
 {
     public partial class AddProductToStorage : Form
     {
-        
+
         StorageItemManager _storageItemManager = new StorageItemManager();
         ProductManager _productManager = new ProductManager();
         StorageManager _storageManager = new StorageManager();
         DepoDbContext db = new DepoDbContext();
         Home home;
+
+
+        Product _product;
+
         public AddProductToStorage(Home home)
         {
             InitializeComponent();
@@ -49,7 +53,7 @@ namespace DepoApp.UI
         {
             StorageItem storageItem = new StorageItem();
             //storageItem.product = _productManager.GetAll().Find(cmbBxProducts.SelectedValue);
-            storageItem.product = db.Products.Find(cmbBxProducts.SelectedValue);
+            storageItem.product = _product;
             storageItem.storage = _storageManager.GetAll().Find(s => s.id == (int)cmbBxStorages.SelectedValue);
             storageItem.count = Convert.ToInt32(numericUpDown1.Value);
 
@@ -79,20 +83,20 @@ namespace DepoApp.UI
 
             if (existingStorageItem != null)
             {
-                //DialogResult dialogResult = MessageBox.Show("Ürün zaten depoda bulunuyor lütfne stok değiştirme işlemi yapın.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                DialogResult dialogResult = MessageBox.Show("Ürün zaten depoda bulunuyor ve adedi "+ existingStorageItem.count + ". Siz ise bu ürünü " + storageItem.count + " stok adedi ile eklemek istiyordunuz. Ürünün stok adedini "+ (existingStorageItem.count + storageItem.count) + " olarak güncellemek ister misiniz?", "Bilgi", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                DialogResult dialogResult = MessageBox.Show("Ürün zaten depoda bulunuyor ve adedi " + existingStorageItem.count + ". Siz ise bu ürünü " + storageItem.count + " stok adedi ile eklemek istiyordunuz. Ürünün stok adedini " + (existingStorageItem.count + storageItem.count) + " olarak güncellemek ister misiniz?", "Bilgi", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dialogResult == DialogResult.Yes)
                 {
                     updateStorageItem(existingStorageItem, existingStorageItem.count + storageItem.count);
                     home.updateStorageItemDataGridView();
                 }
-            } else
+            }
+            else
             {
                 try
                 {
                     // Degismeli
                     db.StorageItems.Add(storageItem);
-                    //db.Products.Attach(storageItem.product);
+                    db.Products.Attach(storageItem.product);
                     db.Storages.Attach(storageItem.storage);
                     if (db.SaveChanges() > 0)
                     {
@@ -123,6 +127,24 @@ namespace DepoApp.UI
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message, exception.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cmbBxProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _product = db.Products.Find(cmbBxProducts.SelectedValue);
+            if (_product != null)
+            {
+                if (_product.measurementType == 0)
+                {
+                    label2.Text = "Adet:";
+                } else if (_product.measurementType == 1)
+                {
+                    label2.Text = "Kg:";
+                } else if (_product.measurementType == 2)
+                {
+                    label2.Text = "Litre:";
+                }
             }
         }
     }

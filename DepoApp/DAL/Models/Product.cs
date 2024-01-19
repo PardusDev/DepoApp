@@ -13,5 +13,9 @@ namespace DepoApp.DAL.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity), Key()]
         public int id { get; set; }
         public string name { get; set; }
+
+        public Category category { get; set; }
+
+        public int measurementType { get; set; }
     }
 }

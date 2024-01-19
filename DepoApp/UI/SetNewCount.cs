@@ -25,7 +25,7 @@ namespace DepoApp.UI
 
             this.selectedStorageItem = selectedStorageItem;
 
-            label1.Text = selectedStorageItem.product.name;
+             label1.Text = selectedStorageItem.product.name;
             numericUpDown1.Value = selectedStorageItem.count;
         }
 

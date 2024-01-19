@@ -48,6 +48,7 @@
             cmbBxProducts.Name = "cmbBxProducts";
             cmbBxProducts.Size = new Size(183, 23);
             cmbBxProducts.TabIndex = 0;
+            cmbBxProducts.SelectedIndexChanged += cmbBxProducts_SelectedIndexChanged;
             // 
             // productBindingSource
             // 
@@ -88,6 +89,7 @@
             label2.Size = new Size(35, 15);
             label2.TabIndex = 4;
             label2.Text = "Adet:";
+            label2.TextAlign = ContentAlignment.MiddleRight;
             // 
             // cmbBxStorages
             // 
