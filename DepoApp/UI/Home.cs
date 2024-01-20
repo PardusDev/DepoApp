@@ -33,6 +33,8 @@ namespace DepoApp
             updateStoragesDataGridView();
 
             updateCategoriesDataGridView();
+
+            updateSalesDataGridView();
         }
 
         #region PRODUCT
@@ -386,6 +388,9 @@ namespace DepoApp
         {
             AddSale addSale = new AddSale();
             addSale.ShowDialog();
+
+            updateSalesDataGridView();
+            updateStorageItemDataGridView();
         }
         #endregion
 
@@ -467,6 +472,8 @@ namespace DepoApp
 
         public void updateSalesDataGridView()
         {
+            // TODO: Sort by date
+            // TODO: Add filter
             dataGridViewSales.Rows.Clear();
 
             using (DepoDbContext db = new DepoDbContext())

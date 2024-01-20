@@ -90,19 +90,24 @@
             button1.TabIndex = 5;
             button1.Text = "Satış Yap";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // AddSale
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(371, 284);
+            ClientSize = new Size(367, 284);
             Controls.Add(button1);
             Controls.Add(numericUpDown1);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(cmbBxStorages);
             Controls.Add(cmbBxProducts);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "AddSale";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Yeni Satış";
             Load += AddSale_Load;
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();

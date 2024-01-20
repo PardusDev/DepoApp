@@ -23,7 +23,7 @@ namespace DepoApp.DAL.Context
         public string DbPath { get; }
 
         //string databaseName = ConfigurationManager.AppSettings["databaseName"];
-        string databaseName = "Depo10.db";
+        string databaseName = "Depo11.db";
         
         
 

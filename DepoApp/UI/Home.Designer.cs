@@ -432,16 +432,16 @@
             panel1.Controls.Add(label2);
             panel1.Controls.Add(btnUpdateStorage);
             panel1.Controls.Add(txtBxStorageUpdate);
-            panel1.Location = new Point(364, 290);
+            panel1.Location = new Point(364, 266);
             panel1.Name = "panel1";
-            panel1.Size = new Size(408, 91);
+            panel1.Size = new Size(408, 115);
             panel1.TabIndex = 3;
             panel1.Visible = false;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(4, 10);
+            label2.Location = new Point(4, 34);
             label2.Name = "label2";
             label2.Size = new Size(59, 15);
             label2.TabIndex = 6;
@@ -449,7 +449,7 @@
             // 
             // btnUpdateStorage
             // 
-            btnUpdateStorage.Location = new Point(275, 57);
+            btnUpdateStorage.Location = new Point(275, 81);
             btnUpdateStorage.Name = "btnUpdateStorage";
             btnUpdateStorage.Size = new Size(130, 31);
             btnUpdateStorage.TabIndex = 5;
@@ -459,7 +459,7 @@
             // 
             // txtBxStorageUpdate
             // 
-            txtBxStorageUpdate.Location = new Point(4, 28);
+            txtBxStorageUpdate.Location = new Point(4, 52);
             txtBxStorageUpdate.Name = "txtBxStorageUpdate";
             txtBxStorageUpdate.Size = new Size(401, 23);
             txtBxStorageUpdate.TabIndex = 0;
@@ -549,15 +549,15 @@
             panel2.Controls.Add(button5);
             panel2.Controls.Add(txtBxCategoryUpdate);
             panel2.Controls.Add(label5);
-            panel2.Location = new Point(354, 300);
+            panel2.Location = new Point(354, 273);
             panel2.Name = "panel2";
-            panel2.Size = new Size(420, 92);
+            panel2.Size = new Size(420, 119);
             panel2.TabIndex = 4;
             panel2.Visible = false;
             // 
             // button5
             // 
-            button5.Location = new Point(294, 63);
+            button5.Location = new Point(294, 90);
             button5.Name = "button5";
             button5.Size = new Size(126, 23);
             button5.TabIndex = 7;
@@ -567,7 +567,7 @@
             // 
             // txtBxCategoryUpdate
             // 
-            txtBxCategoryUpdate.Location = new Point(0, 34);
+            txtBxCategoryUpdate.Location = new Point(0, 61);
             txtBxCategoryUpdate.Name = "txtBxCategoryUpdate";
             txtBxCategoryUpdate.Size = new Size(420, 23);
             txtBxCategoryUpdate.TabIndex = 5;
@@ -575,7 +575,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(0, 16);
+            label5.Location = new Point(0, 43);
             label5.Name = "label5";
             label5.Size = new Size(75, 15);
             label5.TabIndex = 6;
