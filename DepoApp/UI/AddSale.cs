@@ -1,4 +1,5 @@
-﻿using DepoApp.DAL.Context;
+﻿using DepoApp.CustomControls;
+using DepoApp.DAL.Context;
 using DepoApp.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,9 +17,14 @@ namespace DepoApp.UI
     public partial class AddSale : Form
     {
         DepoDbContext db = new DepoDbContext();
+        CurrencyTextBox currencyTextBox = new CurrencyTextBox();
+
         public AddSale()
         {
             InitializeComponent();
+
+            currencyTextBox.Location = new Point(48, 192);
+            this.Controls.Add(currencyTextBox);
         }
 
         private void AddSale_Load(object sender, EventArgs e)
@@ -90,13 +96,22 @@ namespace DepoApp.UI
             sale.date = DateTime.Now;
             // Attention! This calculate will be done later
             //sale.price = existingStorageItem.product.price * sale.count;
-            sale.price = 0;
+            sale.price = Convert.ToDouble(currencyTextBox.Text);
             
             try
             {
-                // Update storage item count
-                // TODO: If count is 0, delete storage item
+                // Update storage item count. If count is 0, delete storage item
+                // But we have a problem. We are using storage item for a sale. So we need to update it.
+                // We have to consider this situation. If we delete storage item, we will lose our sale.
+                // That's why we are not deleting storage item. We are just updating it. But is it really good idea to hold a StorageItem in the Sale object?
                 existingStorageItem.count -= sale.count;
+                /*if (existingStorageItem.count == 0)
+                {
+                    db.StorageItems.Remove(existingStorageItem);
+                } else
+                {
+                    db.StorageItems.Update(existingStorageItem);
+                }*/
                 db.StorageItems.Update(existingStorageItem);
                 db.Sales.Add(sale);
                 if (db.SaveChanges() > 0)

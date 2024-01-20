@@ -34,6 +34,8 @@
             label2 = new Label();
             numericUpDown1 = new NumericUpDown();
             button1 = new Button();
+            label3 = new Label();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
@@ -84,7 +86,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(48, 210);
+            button1.Location = new Point(48, 240);
             button1.Name = "button1";
             button1.Size = new Size(260, 29);
             button1.TabIndex = 5;
@@ -92,11 +94,31 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(48, 121);
+            label3.Name = "label3";
+            label3.Size = new Size(32, 15);
+            label3.TabIndex = 6;
+            label3.Text = "Adet";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(48, 174);
+            label4.Name = "label4";
+            label4.Size = new Size(73, 15);
+            label4.TabIndex = 8;
+            label4.Text = "Toplam Gelir";
+            // 
             // AddSale
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(367, 284);
+            ClientSize = new Size(367, 293);
+            Controls.Add(label4);
+            Controls.Add(label3);
             Controls.Add(button1);
             Controls.Add(numericUpDown1);
             Controls.Add(label2);
@@ -123,5 +145,7 @@
         private Label label2;
         private NumericUpDown numericUpDown1;
         private Button button1;
+        private Label label3;
+        private Label label4;
     }
 }
