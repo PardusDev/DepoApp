@@ -115,7 +115,7 @@ namespace DepoApp.UI
             }
 
             cmbBxProducts.SelectedIndex = 0;
-            numericUpDown1.Value = 0;
+            numericUpDown1.Value = 1;
         }
 
         private void updateStorageItem(StorageItem storageItem, int stockCount)
@@ -139,18 +139,10 @@ namespace DepoApp.UI
         private void cmbBxProducts_SelectedIndexChanged(object sender, EventArgs e)
         {
             _product = db.Products.Find(cmbBxProducts.SelectedValue);
+
             if (_product != null)
             {
-                if (_product.measurementType == 0)
-                {
-                    label2.Text = "Adet:";
-                } else if (_product.measurementType == 1)
-                {
-                    label2.Text = "Kg:";
-                } else if (_product.measurementType == 2)
-                {
-                    label2.Text = "Litre:";
-                }
+                label2.Text = _product.getMeasurementType() + ":";
             }
         }
     }

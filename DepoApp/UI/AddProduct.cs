@@ -77,7 +77,7 @@ namespace DepoApp
                 if (db.SaveChanges() > 0 )
                 {
                     MessageBox.Show("Ürün başarıyla eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    home.dataGridViewProducts.Rows.Add(newProduct.id, newProduct.name, newProduct.category.name, getMeasurementType(newProduct.measurementType));
+                    home.dataGridViewProducts.Rows.Add(newProduct.id, newProduct.name, newProduct.category.name, newProduct.getMeasurementType());
           
                     txtProductName.Text = "";
                 }
@@ -106,26 +106,6 @@ namespace DepoApp
             else
             {
                 return -1;
-            }
-        }
-
-        public string getMeasurementType(int measurementType)
-        {
-            if (measurementType == 0)
-            {
-                return "Adet";
-            }
-            else if (measurementType == 1)
-            {
-                return "Kg";
-            }
-            else if (measurementType == 2)
-            {
-                return "Lt";
-            }
-            else
-            {
-                return "N/A";
             }
         }
     }

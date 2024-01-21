@@ -47,6 +47,7 @@
             cmbBxProducts.Name = "cmbBxProducts";
             cmbBxProducts.Size = new Size(260, 23);
             cmbBxProducts.TabIndex = 0;
+            cmbBxProducts.SelectedIndexChanged += cmbBxProducts_SelectedIndexChanged;
             // 
             // cmbBxStorages
             // 

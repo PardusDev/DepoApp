@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -66,7 +67,7 @@ namespace DepoApp.UI
                 return;
             }
 
-            StorageItem existingStorageItem = db.StorageItems.Include(si => si.product).Include(si => si.storage).Where(si => ((si.product.id == (int) cmbBxProducts.SelectedValue) && (si.storage.id == (int) cmbBxStorages.SelectedValue))).FirstOrDefault();
+            StorageItem existingStorageItem = db.StorageItems.Include(si => si.product).Include(si => si.storage).Where(si => ((si.product.id == (int)cmbBxProducts.SelectedValue) && (si.storage.id == (int)cmbBxStorages.SelectedValue))).FirstOrDefault();
 
             // Check if storage item exists
             if (existingStorageItem == null)
@@ -95,7 +96,7 @@ namespace DepoApp.UI
             sale.count = Convert.ToInt32(numericUpDown1.Value);
             sale.date = DateTime.Now;
             sale.price = Convert.ToDouble(currencyTextBox.Text);
-            
+
             try
             {
                 // Update storage item count. If count is 0, delete storage item
@@ -117,12 +118,29 @@ namespace DepoApp.UI
                     MessageBox.Show("Satış başarıyla gerçekleştirildi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
-            } catch (Exception exception)
+            }
+            catch (Exception exception)
             {
                 MessageBox.Show("Bir hata oluştu. Lütfen tekrar deneyiniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
+        }
+
+        private void cmbBxProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Check if combobox is selected
+            if (cmbBxProducts.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            // Get selected product
+            var selectedProduct = cmbBxProducts.SelectedValue;
+            if (selectedProduct != null && selectedProduct.GetType() == typeof(int))
+            {
+                label3.Text = db.Products.Where(p => p.id == (int) selectedProduct).FirstOrDefault().getMeasurementType() + ":";
+            }
         }
     }
 }

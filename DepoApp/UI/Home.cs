@@ -110,7 +110,7 @@ namespace DepoApp
 
                 foreach (var product in products)
                 {
-                    dataGridViewProducts.Rows.Add(product.id, product.name, product.category.name, getMeasurementType(product.measurementType));
+                    dataGridViewProducts.Rows.Add(product.id, product.name, product.category.name, product.getMeasurementType());
                 }
             }
 
@@ -509,7 +509,7 @@ namespace DepoApp
 
                 foreach (var storageitem in storageItems)
                 {
-                    dataGridViewStorage.Rows.Add(storageitem.id, storageitem.product.name, storageitem.count + " " + getMeasurementType(storageitem.product.measurementType), storageitem.storage.name);
+                    dataGridViewStorage.Rows.Add(storageitem.id, storageitem.product.name, storageitem.count + " " + storageitem.product.getMeasurementType(), storageitem.storage.name);
                 }
             }
         }
@@ -558,7 +558,7 @@ namespace DepoApp
 
                 foreach (var product in products)
                 {
-                    dataGridViewProducts.Rows.Add(product.id, product.name, product.category.name, getMeasurementType(product.measurementType));
+                    dataGridViewProducts.Rows.Add(product.id, product.name, product.category.name, product.getMeasurementType());
                 }
             }
         }
@@ -591,7 +591,7 @@ namespace DepoApp
 
                 foreach (var storageitem in storageItems)
                 {
-                    dataGridViewStorage.Rows.Add(storageitem.id, storageitem.product.name, storageitem.count + " " + getMeasurementType(storageitem.product.measurementType), storageitem.storage.name);
+                    dataGridViewStorage.Rows.Add(storageitem.id, storageitem.product.name, storageitem.count + " " + storageitem.product.getMeasurementType(), storageitem.storage.name);
                 }
             }
         }
@@ -626,28 +626,8 @@ namespace DepoApp
 
                 foreach (var sale in sales)
                 {
-                    dataGridViewSales.Rows.Add(sale.id, sale.storageItem.product.name, sale.storageItem.storage.name, sale.count + " " + getMeasurementType(sale.storageItem.product.measurementType), sale.price);
+                    dataGridViewSales.Rows.Add(sale.id, sale.storageItem.product.name, sale.storageItem.storage.name, sale.count + " " + sale.storageItem.product.getMeasurementType(), sale.price);
                 }
-            }
-        }
-
-        public string getMeasurementType(int measurementType)
-        {
-            if (measurementType == 0)
-            {
-                return "Adet";
-            }
-            else if (measurementType == 1)
-            {
-                return "Kg";
-            }
-            else if (measurementType == 2)
-            {
-                return "Lt";
-            }
-            else
-            {
-                return "N/A";
             }
         }
 
