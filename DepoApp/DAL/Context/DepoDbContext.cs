@@ -3,9 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DepoApp.DAL.Context
 {
@@ -18,6 +20,8 @@ namespace DepoApp.DAL.Context
         public DbSet<StorageItem> StorageItems { get; set; }
 
         public DbSet<Sale> Sales { get; set;}
+
+        public DbSet<StorageItemLog> StorageItemLogs { get; set; }
         
 
         public string DbPath { get; }
@@ -32,13 +36,18 @@ namespace DepoApp.DAL.Context
             var folder = Environment.SpecialFolder.LocalApplicationData;
             var path = Environment.GetFolderPath(folder);
             DbPath = System.IO.Path.Join(path, databaseName);
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
             //Database.Migrate();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("DataSource="+databaseName);
+            optionsBuilder.UseSqlite("DataSource=" + DbPath);
+        }
+
+        public static DepoDbContext Create()
+        {
+            return new DepoDbContext();
         }
     }
 }

@@ -41,12 +41,14 @@ namespace DepoApp
 
         private void btnAddNewProduct_Click(object sender, EventArgs e)
         {
-            AddProduct addProduct = new AddProduct();
+            AddProduct addProduct = new AddProduct(this);
 
             DialogResult dialogResult = addProduct.ShowDialog();
 
-            // Form kapandýðýnda çalýþacak kodlar
-            updateProductsDataGridView();
+            // When form is closed
+            // But it's not necessary to update the products table
+            // Because it's already updated when the form is closed
+            // updateProductsDataGridView();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -68,7 +70,9 @@ namespace DepoApp
                 {
                     MessageBox.Show("Ürün baþarýyla silindi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    updateProductsDataGridView();
+                    // it's not necessary to update the products table
+                    // updateProductsDataGridView();
+                    dataGridViewProducts.Rows.RemoveAt(dataGridViewProducts.SelectedRows[0].Index);
                 }
                 else
                 {
@@ -79,6 +83,36 @@ namespace DepoApp
             {
                 MessageBox.Show(exception.Message, exception.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        // Products tab search button
+        private void button7_Click(object sender, EventArgs e)
+        {
+            // Attention! : Search term is lowercased
+            string searchTerm = txtBxProductsTab.Text.Trim().ToLower();
+
+            using (DepoDbContext db = new DepoDbContext())
+            {
+                var products = db.Products
+                    .Include(p => p.category)
+                    .ToList();
+                if (searchTerm != "")
+                {
+                    products = products.Where(p => p.name.ToLower().Contains(searchTerm)).ToList();
+                }
+                if ((int)cmbBxProductsTabCategories.SelectedValue != -1)
+                {
+                    products = products.Where(p => p.category.id == (int)cmbBxProductsTabCategories.SelectedValue).ToList();
+                }
+
+                dataGridViewProducts.Rows.Clear();
+
+                foreach (var product in products)
+                {
+                    dataGridViewProducts.Rows.Add(product.id, product.name, product.category.name, getMeasurementType(product.measurementType));
+                }
+            }
+            
         }
         #endregion
 
@@ -468,6 +502,7 @@ namespace DepoApp
             }
 
             updateCategoriesComboBox();
+            updateCategoriesComboBoxProductsTab();
         }
 
         public void updateSalesDataGridView()
@@ -540,6 +575,24 @@ namespace DepoApp
                 cmbBxCategories.DataSource = categories;
                 cmbBxCategories.DisplayMember = "name";
                 cmbBxCategories.ValueMember = "id";
+            }
+        }
+
+        public void updateCategoriesComboBoxProductsTab()
+        {
+            List<Category> categories = new List<Category>();
+            categories.Add(new Category()
+            {
+                id = -1,
+                name = "Tüm Kategoriler"
+            });
+            using (DepoDbContext db = new DepoDbContext())
+            {
+                categories.AddRange(db.Categories.OrderBy(c => c.id).ToList());
+
+                cmbBxProductsTabCategories.DataSource = categories;
+                cmbBxProductsTabCategories.DisplayMember = "name";
+                cmbBxProductsTabCategories.ValueMember = "id";
             }
         }
         #endregion

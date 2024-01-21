@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DepoApp.Migrations
 {
     [DbContext(typeof(DepoDbContext))]
-    [Migration("20240120203536_initial")]
+    [Migration("20240121125903_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -120,6 +120,29 @@ namespace DepoApp.Migrations
                     b.HasIndex("storageid");
 
                     b.ToTable("StorageItems");
+                });
+
+            modelBuilder.Entity("DepoApp.DAL.Models.StorageItemLog", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("count")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("storageItemId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("transactionType")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("StorageItemLogs");
                 });
 
             modelBuilder.Entity("DepoApp.DAL.Models.Product", b =>

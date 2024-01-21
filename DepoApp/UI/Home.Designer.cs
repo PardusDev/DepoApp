@@ -52,6 +52,10 @@
             countProductStorage = new DataGridViewTextBoxColumn();
             storageItemStorageName = new DataGridViewTextBoxColumn();
             tabPage2 = new TabPage();
+            button7 = new Button();
+            cmbBxProductsTabCategories = new ComboBox();
+            txtBxProductsTab = new TextBox();
+            label10 = new Label();
             button1 = new Button();
             dataGridViewProducts = new DataGridView();
             id = new DataGridViewTextBoxColumn();
@@ -315,6 +319,10 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(button7);
+            tabPage2.Controls.Add(cmbBxProductsTabCategories);
+            tabPage2.Controls.Add(txtBxProductsTab);
+            tabPage2.Controls.Add(label10);
             tabPage2.Controls.Add(button1);
             tabPage2.Controls.Add(dataGridViewProducts);
             tabPage2.Controls.Add(btnAddNewProduct);
@@ -325,6 +333,42 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Ürünler";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            button7.Location = new Point(426, 7);
+            button7.Name = "button7";
+            button7.Size = new Size(89, 23);
+            button7.TabIndex = 11;
+            button7.Text = "Arama Yap";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
+            // 
+            // cmbBxProductsTabCategories
+            // 
+            cmbBxProductsTabCategories.FormattingEnabled = true;
+            cmbBxProductsTabCategories.Items.AddRange(new object[] { "Tüm Depolar" });
+            cmbBxProductsTabCategories.Location = new Point(261, 7);
+            cmbBxProductsTabCategories.Name = "cmbBxProductsTabCategories";
+            cmbBxProductsTabCategories.Size = new Size(140, 23);
+            cmbBxProductsTabCategories.TabIndex = 10;
+            // 
+            // txtBxProductsTab
+            // 
+            txtBxProductsTab.Location = new Point(71, 7);
+            txtBxProductsTab.Name = "txtBxProductsTab";
+            txtBxProductsTab.PlaceholderText = "Ürün Adı";
+            txtBxProductsTab.Size = new Size(170, 23);
+            txtBxProductsTab.TabIndex = 9;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(-2, 10);
+            label10.Name = "label10";
+            label10.Size = new Size(67, 15);
+            label10.TabIndex = 8;
+            label10.Text = "Arama Yap:";
             // 
             // button1
             // 
@@ -343,11 +387,11 @@
             dataGridViewProducts.AllowUserToOrderColumns = true;
             dataGridViewProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewProducts.Columns.AddRange(new DataGridViewColumn[] { id, name, productCategory, productMeasurement });
-            dataGridViewProducts.Location = new Point(0, 6);
+            dataGridViewProducts.Location = new Point(0, 36);
             dataGridViewProducts.Name = "dataGridViewProducts";
             dataGridViewProducts.ReadOnly = true;
             dataGridViewProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewProducts.Size = new Size(789, 363);
+            dataGridViewProducts.Size = new Size(789, 333);
             dataGridViewProducts.TabIndex = 3;
             // 
             // id
@@ -655,6 +699,7 @@
             tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewStorage).EndInit();
             tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).EndInit();
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
@@ -670,11 +715,9 @@
         }
 
         #endregion
-        private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
         private Button btnAddNewProduct;
-        private DataGridView dataGridViewProducts;
         private DataGridView dataGridViewStorage;
         private Button btnAddNewProductToStorage;
         private Button button1;
@@ -727,5 +770,11 @@
         private DataGridViewTextBoxColumn saleCount;
         private DataGridViewTextBoxColumn salePrice;
         private Button button8;
+        private Button button7;
+        private ComboBox cmbBxProductsTabCategories;
+        private TextBox txtBxProductsTab;
+        private Label label10;
+        private TabControl tabControl1;
+        public DataGridView dataGridViewProducts;
     }
 }

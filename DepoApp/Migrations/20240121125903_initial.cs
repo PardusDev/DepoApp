@@ -25,6 +25,22 @@ namespace DepoApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "StorageItemLogs",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    storageItemId = table.Column<int>(type: "INTEGER", nullable: false),
+                    count = table.Column<int>(type: "INTEGER", nullable: false),
+                    date = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    transactionType = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StorageItemLogs", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Storages",
                 columns: table => new
                 {
@@ -133,6 +149,9 @@ namespace DepoApp.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Sales");
+
+            migrationBuilder.DropTable(
+                name: "StorageItemLogs");
 
             migrationBuilder.DropTable(
                 name: "StorageItems");

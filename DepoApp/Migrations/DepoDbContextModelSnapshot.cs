@@ -119,6 +119,29 @@ namespace DepoApp.Migrations
                     b.ToTable("StorageItems");
                 });
 
+            modelBuilder.Entity("DepoApp.DAL.Models.StorageItemLog", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("count")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("storageItemId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("transactionType")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("StorageItemLogs");
+                });
+
             modelBuilder.Entity("DepoApp.DAL.Models.Product", b =>
                 {
                     b.HasOne("DepoApp.DAL.Models.Category", "category")

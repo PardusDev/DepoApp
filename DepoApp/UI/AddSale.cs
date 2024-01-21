@@ -94,8 +94,6 @@ namespace DepoApp.UI
             sale.storageItem = existingStorageItem;
             sale.count = Convert.ToInt32(numericUpDown1.Value);
             sale.date = DateTime.Now;
-            // Attention! This calculate will be done later
-            //sale.price = existingStorageItem.product.price * sale.count;
             sale.price = Convert.ToDouble(currencyTextBox.Text);
             
             try

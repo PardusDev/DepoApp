@@ -19,6 +19,7 @@ namespace DepoApp.UI
     {
 
         StorageItemManager _storageItemManager = new StorageItemManager();
+        StorageItemLogManager _storageItemLogManager = new StorageItemLogManager();
         ProductManager _productManager = new ProductManager();
         StorageManager _storageManager = new StorageManager();
         DepoDbContext db = new DepoDbContext();
@@ -71,10 +72,10 @@ namespace DepoApp.UI
                 return;
             }
 
-            // Check product count is greater or equal to 0
-            if (storageItem.count < 0)
+            // Check product count is greater than 0
+            if (storageItem.count <= 0)
             {
-                MessageBox.Show("Lütfen ürün adedini 0'dan küçük olamaz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lütfen ürün adedini 0 ve 0'dan küçük olamaz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -86,7 +87,7 @@ namespace DepoApp.UI
                 DialogResult dialogResult = MessageBox.Show("Ürün zaten depoda bulunuyor ve adedi " + existingStorageItem.count + ". Siz ise bu ürünü " + storageItem.count + " stok adedi ile eklemek istiyordunuz. Ürünün stok adedini " + (existingStorageItem.count + storageItem.count) + " olarak güncellemek ister misiniz?", "Bilgi", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    updateStorageItem(existingStorageItem, existingStorageItem.count + storageItem.count);
+                    updateStorageItem(existingStorageItem, storageItem.count);
                     home.updateStorageItemDataGridView();
                 }
             }
@@ -98,7 +99,10 @@ namespace DepoApp.UI
                     db.StorageItems.Add(storageItem);
                     db.Products.Attach(storageItem.product);
                     db.Storages.Attach(storageItem.storage);
-                    if (db.SaveChanges() > 0)
+
+                    // Add log
+                    StorageItemLog storageItemLog = new StorageItemLog(storageItem.id, storageItem.count, 1);
+                    if ((db.SaveChanges() > 0) && _storageItemLogManager.Add(storageItemLog))
                     {
                         MessageBox.Show("Ürün başarıyla depoya eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         home.updateStorageItemDataGridView();
@@ -118,9 +122,11 @@ namespace DepoApp.UI
         {
             try
             {
-                storageItem.count = stockCount;
-                if (_storageItemManager.Update(storageItem))
-                {
+                storageItem.count += stockCount;
+                // Add log
+                StorageItemLog storageItemLog = new StorageItemLog(storageItem.id, stockCount, 1);
+                if (_storageItemManager.Update(storageItem) && _storageItemLogManager.Add(storageItemLog))
+                {   
                     MessageBox.Show("Ürün başarıyla güncellendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
