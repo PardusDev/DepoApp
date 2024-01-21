@@ -13,6 +13,7 @@ namespace DepoApp
         ProductManager _productManager = new ProductManager();
         StorageManager _storageManager = new StorageManager();
         StorageItemManager _storageItemManager = new StorageItemManager();
+        CategoryManager _categoryManager = new CategoryManager();
 
         int selectedStorageID = 0;
         int selectedCategoryID = 0;
@@ -112,7 +113,7 @@ namespace DepoApp
                     dataGridViewProducts.Rows.Add(product.id, product.name, product.category.name, getMeasurementType(product.measurementType));
                 }
             }
-            
+
         }
         #endregion
 
@@ -148,7 +149,9 @@ namespace DepoApp
                 {
                     MessageBox.Show("Depo baþarýyla eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    updateStoragesDataGridView();
+                    // it's not necessary to update the storages table
+                    // updateStoragesDataGridView();
+                    dataGridViewStorages.Rows.Add(storage.id, storage.name);
                 }
                 else
                 {
@@ -204,7 +207,9 @@ namespace DepoApp
                     {
                         MessageBox.Show("Depo baþarýyla güncellendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        updateStoragesDataGridView();
+                        // It's not necessary to update the storages table
+                        // updateStoragesDataGridView();
+                        dataGridViewStorages.SelectedRows[0].Cells[1].Value = storage.name;
                     }
                 }
                 catch (Exception exception)
@@ -247,7 +252,9 @@ namespace DepoApp
                 {
                     MessageBox.Show("Kategori baþarýyla eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    updateCategoriesDataGridView();
+                    // it's not necessary to update the categories table
+                    // updateCategoriesDataGridView();
+                    dataGridViewCategories.Rows.Add(category.id, category.name);
                 }
                 else
                 {
@@ -302,13 +309,14 @@ namespace DepoApp
 
                 try
                 {
-                    db.Categories.Update(category);
 
-                    if (db.SaveChanges() > 0)
+                    if (_categoryManager.Update(category))
                     {
                         MessageBox.Show("Kategori baþarýyla güncellendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        updateCategoriesDataGridView();
+                        // It's not necessary to update the categories table
+                        // updateCategoriesDataGridView();
+                        dataGridViewCategories.SelectedRows[0].Cells[1].Value = category.name;
                     }
                     else
                     {
@@ -319,6 +327,33 @@ namespace DepoApp
                 {
                     MessageBox.Show(exception.Message, exception.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        // Delete category button
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (selectedCategoryID != 0)
+            {
+                try
+                {
+                    if (_categoryManager.RemoveById(selectedCategoryID))
+                    {
+                        MessageBox.Show("Kategori baþarýyla silindi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Delete from datagridview
+                        dataGridViewCategories.Rows.RemoveAt(dataGridViewCategories.SelectedRows[0].Index);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Kategori silinirken bir hata oluþtu.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
         }
         #endregion
@@ -426,6 +461,17 @@ namespace DepoApp
             updateSalesDataGridView();
             updateStorageItemDataGridView();
         }
+        #endregion
+
+        #region MENU STRIP AREA
+
+        #region PRODUCT STOCK AREA
+        private void ürünStokRaporlarýToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
         #endregion
 
         #region UTILITY METHODS
@@ -596,6 +642,8 @@ namespace DepoApp
             }
         }
         #endregion
+
+
 
 
         

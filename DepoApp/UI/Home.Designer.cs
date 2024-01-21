@@ -80,6 +80,7 @@
             label8 = new Label();
             label6 = new Label();
             panel2 = new Panel();
+            button9 = new Button();
             button5 = new Button();
             txtBxCategoryUpdate = new TextBox();
             label5 = new Label();
@@ -89,6 +90,9 @@
             dataGridViewCategories = new DataGridView();
             categoryId = new DataGridViewTextBoxColumn();
             categoryName = new DataGridViewTextBoxColumn();
+            menuStrip1 = new MenuStrip();
+            raporlarToolStripMenuItem = new ToolStripMenuItem();
+            ürünStokRaporlarıToolStripMenuItem = new ToolStripMenuItem();
             tabControl1.SuspendLayout();
             tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSales).BeginInit();
@@ -102,6 +106,7 @@
             tabPage4.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewCategories).BeginInit();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -112,7 +117,7 @@
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage4);
             tabControl1.ItemSize = new Size(68, 20);
-            tabControl1.Location = new Point(0, 1);
+            tabControl1.Location = new Point(0, 27);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(797, 448);
@@ -590,6 +595,7 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(button9);
             panel2.Controls.Add(button5);
             panel2.Controls.Add(txtBxCategoryUpdate);
             panel2.Controls.Add(label5);
@@ -598,6 +604,16 @@
             panel2.Size = new Size(420, 119);
             panel2.TabIndex = 4;
             panel2.Visible = false;
+            // 
+            // button9
+            // 
+            button9.Location = new Point(0, 90);
+            button9.Name = "button9";
+            button9.Size = new Size(94, 23);
+            button9.TabIndex = 8;
+            button9.Text = "Kategoriyi Sil";
+            button9.UseVisualStyleBackColor = true;
+            button9.Click += button9_Click;
             // 
             // button5
             // 
@@ -679,13 +695,38 @@
             categoryName.Name = "categoryName";
             categoryName.ReadOnly = true;
             // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { raporlarToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.TabIndex = 2;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // raporlarToolStripMenuItem
+            // 
+            raporlarToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ürünStokRaporlarıToolStripMenuItem });
+            raporlarToolStripMenuItem.Name = "raporlarToolStripMenuItem";
+            raporlarToolStripMenuItem.Size = new Size(63, 20);
+            raporlarToolStripMenuItem.Text = "Raporlar";
+            // 
+            // ürünStokRaporlarıToolStripMenuItem
+            // 
+            ürünStokRaporlarıToolStripMenuItem.Name = "ürünStokRaporlarıToolStripMenuItem";
+            ürünStokRaporlarıToolStripMenuItem.Size = new Size(167, 22);
+            ürünStokRaporlarıToolStripMenuItem.Text = "Ürün Stok Raporu";
+            ürünStokRaporlarıToolStripMenuItem.Click += ürünStokRaporlarıToolStripMenuItem_Click;
+            // 
             // Home
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 473);
             Controls.Add(tabControl1);
+            Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MainMenuStrip = menuStrip1;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "Home";
@@ -711,7 +752,10 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewCategories).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -776,5 +820,9 @@
         private Label label10;
         private TabControl tabControl1;
         public DataGridView dataGridViewProducts;
+        private Button button9;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem raporlarToolStripMenuItem;
+        private ToolStripMenuItem ürünStokRaporlarıToolStripMenuItem;
     }
 }
