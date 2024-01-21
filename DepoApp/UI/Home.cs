@@ -210,12 +210,51 @@ namespace DepoApp
                         // It's not necessary to update the storages table
                         // updateStoragesDataGridView();
                         dataGridViewStorages.SelectedRows[0].Cells[1].Value = storage.name;
+                        updateStorageItemDataGridView();
+                        updateStoragesComboBox();
+                        updateSalesDataGridView();
                     }
                 }
                 catch (Exception exception)
                 {
                     MessageBox.Show(exception.Message, exception.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            // Check if the storage id is valid
+            if (selectedStorageID != 0)
+            {
+                // Check storage is used in storage items
+                if (_storageItemManager.GetAll().Where(s => s.storage.id == selectedStorageID).FirstOrDefault() != null)
+                {
+                    MessageBox.Show("Bu depo stoklarda kullanýlýyor. Önce stoklardan silmelisiniz.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                try
+                {
+                    Storage existingStorage = _storageManager.GetAll().Where(s => s.id == selectedStorageID).FirstOrDefault();
+                    if (_storageManager.Remove(existingStorage))
+                    {
+                        MessageBox.Show("Depo baþarýyla silindi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Delete from datagridview
+                        dataGridViewStorages.Rows.RemoveAt(dataGridViewStorages.SelectedRows[0].Index);
+                    } else
+                    {
+                        MessageBox.Show("Depo silinirken bir hata oluþtu.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    
+                } catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            } else
+            {
+                MessageBox.Show("Lütfen bir depo seçiniz.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -317,6 +356,17 @@ namespace DepoApp
                         // It's not necessary to update the categories table
                         // updateCategoriesDataGridView();
                         dataGridViewCategories.SelectedRows[0].Cells[1].Value = category.name;
+                        // Products Tab
+                        updateCategoriesComboBoxProductsTab();
+                        updateProductsDataGridView();
+
+                        // StorageItem Tab
+                        updateCategoriesComboBox();
+                        updateStorageItemDataGridView();
+
+                        // Sales Tab
+                        // TODO: Sales tab's search filter
+                        updateSalesDataGridView();
                     }
                     else
                     {
@@ -333,6 +383,19 @@ namespace DepoApp
         // Delete category button
         private void button9_Click(object sender, EventArgs e)
         {
+
+            if (dataGridViewCategories.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Lütfen bir kategori seçiniz.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (db.Products.Include(p => p.category).Where(p => p.category.id == selectedCategoryID).FirstOrDefault() != null)
+            {
+                MessageBox.Show("Bu kategoriye ait ürünler var. Önce ürünleri silmelisiniz.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (selectedCategoryID != 0)
             {
                 try
@@ -642,6 +705,7 @@ namespace DepoApp
             }
         }
         #endregion
+
 
 
 

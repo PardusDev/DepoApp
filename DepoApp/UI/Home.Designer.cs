@@ -93,6 +93,7 @@
             menuStrip1 = new MenuStrip();
             raporlarToolStripMenuItem = new ToolStripMenuItem();
             ürünStokRaporlarıToolStripMenuItem = new ToolStripMenuItem();
+            button10 = new Button();
             tabControl1.SuspendLayout();
             tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSales).BeginInit();
@@ -478,6 +479,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(button10);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(btnUpdateStorage);
             panel1.Controls.Add(txtBxStorageUpdate);
@@ -556,7 +558,7 @@
             // 
             // storageName
             // 
-            storageName.HeaderText = "name";
+            storageName.HeaderText = "Depo Adı";
             storageName.Name = "storageName";
             storageName.ReadOnly = true;
             // 
@@ -718,6 +720,16 @@
             ürünStokRaporlarıToolStripMenuItem.Text = "Ürün Stok Raporu";
             ürünStokRaporlarıToolStripMenuItem.Click += ürünStokRaporlarıToolStripMenuItem_Click;
             // 
+            // button10
+            // 
+            button10.Location = new Point(4, 81);
+            button10.Name = "button10";
+            button10.Size = new Size(130, 31);
+            button10.TabIndex = 7;
+            button10.Text = "Depoyu Sil";
+            button10.UseVisualStyleBackColor = true;
+            button10.Click += button10_Click;
+            // 
             // Home
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -769,8 +781,6 @@
         private Button button3;
         private TabPage tabPage3;
         private DataGridView dataGridViewStorages;
-        private DataGridViewTextBoxColumn storageId;
-        private DataGridViewTextBoxColumn storageName;
         private Button btnAddNewStorage;
         private TextBox txtBxStorageName;
         private Label label1;
@@ -824,5 +834,8 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem raporlarToolStripMenuItem;
         private ToolStripMenuItem ürünStokRaporlarıToolStripMenuItem;
+        private DataGridViewTextBoxColumn storageId;
+        private DataGridViewTextBoxColumn storageName;
+        private Button button10;
     }
 }
