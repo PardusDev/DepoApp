@@ -528,13 +528,15 @@ namespace DepoApp
 
         #region MENU STRIP AREA
 
-        #region PRODUCT STOCK AREA
-        private void ürünStokRaporlarýToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+            #region PRODUCT STOCK AREA
 
-        }
-        #endregion
+            private void ürünStokRaporlarýToolStripMenuItem_Click(object sender, EventArgs e)
+            {
+                InventoryReport inventoryReport = new InventoryReport();
+                inventoryReport.ShowDialog();
+            }
 
+            #endregion
         #endregion
 
         #region UTILITY METHODS

@@ -1,5 +1,6 @@
 ﻿using DepoApp.CustomControls;
 using DepoApp.DAL.Context;
+using DepoApp.DAL.Manager;
 using DepoApp.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,6 +20,7 @@ namespace DepoApp.UI
     {
         DepoDbContext db = new DepoDbContext();
         CurrencyTextBox currencyTextBox = new CurrencyTextBox();
+        StorageItemLogManager storageItemLogManager = new StorageItemLogManager();
 
         public AddSale()
         {
@@ -113,7 +115,10 @@ namespace DepoApp.UI
                 }*/
                 db.StorageItems.Update(existingStorageItem);
                 db.Sales.Add(sale);
-                if (db.SaveChanges() > 0)
+                // Add Log
+                StorageItemLog storageItemLog = new StorageItemLog(existingStorageItem.id, sale.count, 2);
+                
+                if (db.SaveChanges() > 0 && storageItemLogManager.Add(storageItemLog))
                 {
                     MessageBox.Show("Satış başarıyla gerçekleştirildi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();

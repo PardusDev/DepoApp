@@ -31,5 +31,11 @@ namespace DepoApp.DAL.Manager
         {
             return _storageItemLogGateway.Update(storageItemLog);
         }
+
+        public StorageItem getStorageItem(StorageItemLog storageItemLog)
+        {
+            return _storageItemLogGateway.getStorageItem(storageItemLog);
+        }
+
     }
 }

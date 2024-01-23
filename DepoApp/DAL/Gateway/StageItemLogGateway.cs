@@ -59,5 +59,15 @@ namespace DepoApp.DAL.Gateway
                 throw exception;
             }
         }
+
+        public StorageItem getStorageItem(StorageItemLog storageItemLog)
+        {
+            StorageItem storageItem = db.StorageItems.Include(si => si.product).FirstOrDefault(si => si.product.id == storageItemLog.storageItemId);
+            if (storageItem != null)
+                return storageItem;
+            else
+                return new StorageItem();
+                
+        }
     }
 }
