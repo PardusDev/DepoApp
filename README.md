@@ -38,7 +38,7 @@ Here are the desired features in the program:
 * Adding Products in Different Units of Measurement
 * Sales and Revenue Generation
 * Income-Expense Report
-* Barcode Scanning (Not Completed)
+* Barcode Scanning
 * Different User Logins (Not Completed)
 * Output in PDF Format (Not Completed)
 
