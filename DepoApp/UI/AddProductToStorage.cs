@@ -1,4 +1,5 @@
-﻿using DepoApp.DAL.Context;
+﻿using AForge.Video.DirectShow;
+using DepoApp.DAL.Context;
 using DepoApp.DAL.Manager;
 using DepoApp.DAL.Models;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,11 @@ namespace DepoApp.UI
         {
             InitializeComponent();
             this.home = home;
+
+            if (this.home.videoCaptureDevice.IsRunning)
+            {
+                this.home.videoCaptureDevice.SignalToStop();
+            }
         }
 
         private void AddProductToStorage_Load(object sender, EventArgs e)
@@ -126,7 +132,7 @@ namespace DepoApp.UI
                 // Add log
                 StorageItemLog storageItemLog = new StorageItemLog(storageItem.id, stockCount, 1);
                 if (_storageItemManager.Update(storageItem) && _storageItemLogManager.Add(storageItemLog))
-                {   
+                {
                     MessageBox.Show("Ürün başarıyla güncellendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -143,6 +149,24 @@ namespace DepoApp.UI
             if (_product != null)
             {
                 label2.Text = _product.getMeasurementType() + ":";
+            }
+        }
+
+        private void txtBxBarcodeAddPrdToStorage_Click(object sender, EventArgs e)
+        {
+            // TODO: When a barcode is found, the comboboxes will be arranged according to that product.
+            ((TextBox)sender).Text = "";
+            this.home.scannerTextBox = ((TextBox)sender);
+            this.home.videoCaptureDevice = new VideoCaptureDevice(this.home.filterInfoCollection[0].MonikerString);
+            this.home.videoCaptureDevice.NewFrame += this.home.VideoCaptureDevice_BarcodeFrame;
+            this.home.videoCaptureDevice.Start();
+        }
+
+        private void AddProductToStorage_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (this.home.videoCaptureDevice.IsRunning)
+            {
+                this.home.videoCaptureDevice.SignalToStop();
             }
         }
     }

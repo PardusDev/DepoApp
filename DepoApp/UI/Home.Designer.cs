@@ -38,6 +38,7 @@
             saleCount = new DataGridViewTextBoxColumn();
             salePrice = new DataGridViewTextBoxColumn();
             tabPage1 = new TabPage();
+            txtBxBarcodeStorageItem = new TextBox();
             cmbBxCategories = new ComboBox();
             button6 = new Button();
             cmbBxStorages = new ComboBox();
@@ -52,6 +53,7 @@
             countProductStorage = new DataGridViewTextBoxColumn();
             storageItemStorageName = new DataGridViewTextBoxColumn();
             tabPage2 = new TabPage();
+            txtBxBarcodeProducts = new TextBox();
             button7 = new Button();
             cmbBxProductsTabCategories = new ComboBox();
             txtBxProductsTab = new TextBox();
@@ -68,6 +70,7 @@
             label3 = new Label();
             label1 = new Label();
             panel1 = new Panel();
+            button10 = new Button();
             label2 = new Label();
             btnUpdateStorage = new Button();
             txtBxStorageUpdate = new TextBox();
@@ -93,7 +96,6 @@
             menuStrip1 = new MenuStrip();
             raporlarToolStripMenuItem = new ToolStripMenuItem();
             ürünStokRaporlarıToolStripMenuItem = new ToolStripMenuItem();
-            button10 = new Button();
             tabControl1.SuspendLayout();
             tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSales).BeginInit();
@@ -121,7 +123,7 @@
             tabControl1.Location = new Point(0, 27);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(797, 448);
+            tabControl1.Size = new Size(797, 496);
             tabControl1.TabIndex = 1;
             // 
             // tabPage5
@@ -130,7 +132,7 @@
             tabPage5.Controls.Add(dataGridViewSales);
             tabPage5.Location = new Point(4, 24);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(789, 420);
+            tabPage5.Size = new Size(789, 468);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Satışlar";
             tabPage5.UseVisualStyleBackColor = true;
@@ -191,6 +193,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(txtBxBarcodeStorageItem);
             tabPage1.Controls.Add(cmbBxCategories);
             tabPage1.Controls.Add(button6);
             tabPage1.Controls.Add(cmbBxStorages);
@@ -203,10 +206,19 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(789, 420);
+            tabPage1.Size = new Size(789, 468);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Depo";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // txtBxBarcodeStorageItem
+            // 
+            txtBxBarcodeStorageItem.Location = new Point(73, 38);
+            txtBxBarcodeStorageItem.Name = "txtBxBarcodeStorageItem";
+            txtBxBarcodeStorageItem.PlaceholderText = "Barkod Okutmak İçin Tıklayın";
+            txtBxBarcodeStorageItem.Size = new Size(170, 23);
+            txtBxBarcodeStorageItem.TabIndex = 9;
+            txtBxBarcodeStorageItem.Click += txtBxBarcodeStorageItem_Click;
             // 
             // cmbBxCategories
             // 
@@ -256,8 +268,8 @@
             // button3
             // 
             button3.BackColor = Color.Transparent;
-            button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            button3.Location = new Point(591, 375);
+            button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button3.Location = new Point(591, 421);
             button3.Name = "button3";
             button3.Size = new Size(121, 40);
             button3.TabIndex = 3;
@@ -267,7 +279,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(464, 375);
+            button2.Location = new Point(464, 421);
             button2.Name = "button2";
             button2.Size = new Size(121, 40);
             button2.TabIndex = 2;
@@ -277,7 +289,7 @@
             // 
             // btnAddNewProductToStorage
             // 
-            btnAddNewProductToStorage.Location = new Point(337, 375);
+            btnAddNewProductToStorage.Location = new Point(337, 421);
             btnAddNewProductToStorage.Name = "btnAddNewProductToStorage";
             btnAddNewProductToStorage.Size = new Size(121, 40);
             btnAddNewProductToStorage.TabIndex = 1;
@@ -292,7 +304,7 @@
             dataGridViewStorage.AllowUserToOrderColumns = true;
             dataGridViewStorage.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewStorage.Columns.AddRange(new DataGridViewColumn[] { idStorage, productNameStorage, countProductStorage, storageItemStorageName });
-            dataGridViewStorage.Location = new Point(0, 36);
+            dataGridViewStorage.Location = new Point(0, 83);
             dataGridViewStorage.Name = "dataGridViewStorage";
             dataGridViewStorage.ReadOnly = true;
             dataGridViewStorage.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -325,6 +337,7 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(txtBxBarcodeProducts);
             tabPage2.Controls.Add(button7);
             tabPage2.Controls.Add(cmbBxProductsTabCategories);
             tabPage2.Controls.Add(txtBxProductsTab);
@@ -335,10 +348,19 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(789, 420);
+            tabPage2.Size = new Size(789, 468);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Ürünler";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // txtBxBarcodeProducts
+            // 
+            txtBxBarcodeProducts.Location = new Point(71, 36);
+            txtBxBarcodeProducts.Name = "txtBxBarcodeProducts";
+            txtBxBarcodeProducts.PlaceholderText = "Barkod Okutmak İçin Tıklayın";
+            txtBxBarcodeProducts.Size = new Size(170, 23);
+            txtBxBarcodeProducts.TabIndex = 12;
+            txtBxBarcodeProducts.Click += txtBxBarcodeProducts_Click;
             // 
             // button7
             // 
@@ -378,7 +400,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(484, 375);
+            button1.Location = new Point(484, 422);
             button1.Name = "button1";
             button1.Size = new Size(108, 39);
             button1.TabIndex = 4;
@@ -393,7 +415,7 @@
             dataGridViewProducts.AllowUserToOrderColumns = true;
             dataGridViewProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewProducts.Columns.AddRange(new DataGridViewColumn[] { id, name, productCategory, productMeasurement });
-            dataGridViewProducts.Location = new Point(0, 36);
+            dataGridViewProducts.Location = new Point(0, 83);
             dataGridViewProducts.Name = "dataGridViewProducts";
             dataGridViewProducts.ReadOnly = true;
             dataGridViewProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -426,7 +448,7 @@
             // 
             // btnAddNewProduct
             // 
-            btnAddNewProduct.Location = new Point(370, 375);
+            btnAddNewProduct.Location = new Point(370, 422);
             btnAddNewProduct.Name = "btnAddNewProduct";
             btnAddNewProduct.Size = new Size(108, 39);
             btnAddNewProduct.TabIndex = 2;
@@ -446,7 +468,7 @@
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(789, 420);
+            tabPage3.Size = new Size(789, 468);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Depolar";
             tabPage3.UseVisualStyleBackColor = true;
@@ -488,6 +510,16 @@
             panel1.Size = new Size(408, 115);
             panel1.TabIndex = 3;
             panel1.Visible = false;
+            // 
+            // button10
+            // 
+            button10.Location = new Point(4, 81);
+            button10.Name = "button10";
+            button10.Size = new Size(130, 31);
+            button10.TabIndex = 7;
+            button10.Text = "Depoyu Sil";
+            button10.UseVisualStyleBackColor = true;
+            button10.Click += button10_Click;
             // 
             // label2
             // 
@@ -573,7 +605,7 @@
             tabPage4.Controls.Add(dataGridViewCategories);
             tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(789, 420);
+            tabPage4.Size = new Size(789, 468);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Kategoriler";
             tabPage4.UseVisualStyleBackColor = true;
@@ -720,21 +752,11 @@
             ürünStokRaporlarıToolStripMenuItem.Text = "Ürün Stok Raporu";
             ürünStokRaporlarıToolStripMenuItem.Click += ürünStokRaporlarıToolStripMenuItem_Click;
             // 
-            // button10
-            // 
-            button10.Location = new Point(4, 81);
-            button10.Name = "button10";
-            button10.Size = new Size(130, 31);
-            button10.TabIndex = 7;
-            button10.Text = "Depoyu Sil";
-            button10.UseVisualStyleBackColor = true;
-            button10.Click += button10_Click;
-            // 
             // Home
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 473);
+            ClientSize = new Size(800, 524);
             Controls.Add(tabControl1);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -837,5 +859,7 @@
         private DataGridViewTextBoxColumn storageId;
         private DataGridViewTextBoxColumn storageName;
         private Button button10;
+        private TextBox txtBxBarcodeProducts;
+        private TextBox txtBxBarcodeStorageItem;
     }
 }

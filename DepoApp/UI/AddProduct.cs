@@ -1,4 +1,7 @@
-﻿using DepoApp.DAL.Context;
+﻿using AForge.Video;
+using AForge.Video.DirectShow;
+using ZXing;
+using DepoApp.DAL.Context;
 using DepoApp.DAL.Manager;
 using DepoApp.DAL.Models;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +14,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
+
 
 namespace DepoApp
 {
@@ -26,17 +31,24 @@ namespace DepoApp
             this.home = home;
         }
 
+
         private void AddProduct_Load(object sender, EventArgs e)
         {
             var categories = db.Categories.OrderBy(c => c.id).ToList();
             cmbBxCategories.ValueMember = "id";
             cmbBxCategories.DisplayMember = "name";
             cmbBxCategories.DataSource = categories;
+
+            if (this.home.videoCaptureDevice.IsRunning)
+            {
+                this.home.videoCaptureDevice.SignalToStop();
+            }
         }
 
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
             Product newProduct = new Product();
+            newProduct.barcode = txtBxBarcode.Text.Trim();
             newProduct.name = txtProductName.Text.Trim();
             newProduct.category = db.Categories.Find(cmbBxCategories.SelectedValue);
             newProduct.measurementType = getMeasurementType();
@@ -70,15 +82,22 @@ namespace DepoApp
                 return;
             }
 
+            // Check if barcode is empty
+            if (newProduct.barcode == "")
+            {
+                MessageBox.Show("Lütfen bir barkod giriniz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             try
             {
                 db.Products.Add(newProduct);
                 db.Categories.Attach(newProduct.category);
-                if (db.SaveChanges() > 0 )
+                if (db.SaveChanges() > 0)
                 {
                     MessageBox.Show("Ürün başarıyla eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     home.dataGridViewProducts.Rows.Add(newProduct.id, newProduct.name, newProduct.category.name, newProduct.getMeasurementType());
-          
+
                     txtProductName.Text = "";
                 }
             }
@@ -106,6 +125,21 @@ namespace DepoApp
             else
             {
                 return -1;
+            }
+        }
+
+        private void txtBxBarcode_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).Text = "";
+            this.home.scannerTextBox = (TextBox)sender;
+            this.home.videoCaptureDevice.Start();
+        }
+
+        private void AddProduct_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (this.home.videoCaptureDevice.IsRunning)
+            {
+                this.home.videoCaptureDevice.SignalToStop();
             }
         }
     }

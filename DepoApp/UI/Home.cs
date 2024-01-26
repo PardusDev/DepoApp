@@ -1,3 +1,4 @@
+using AForge.Video.DirectShow;
 using DepoApp.DAL.Context;
 using DepoApp.DAL.Manager;
 using DepoApp.DAL.Models;
@@ -18,10 +19,15 @@ namespace DepoApp
         int selectedStorageID = 0;
         int selectedCategoryID = 0;
 
+        public TextBox scannerTextBox;
+
         public Home()
         {
             InitializeComponent();
         }
+
+        public FilterInfoCollection filterInfoCollection;
+        public VideoCaptureDevice videoCaptureDevice;
 
 
 
@@ -36,6 +42,10 @@ namespace DepoApp
             updateCategoriesDataGridView();
 
             updateSalesDataGridView();
+
+            filterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            videoCaptureDevice = new VideoCaptureDevice(filterInfoCollection[0].MonikerString);
+            videoCaptureDevice.NewFrame += VideoCaptureDevice_BarcodeFrame;
         }
 
         #region PRODUCT
@@ -105,6 +115,10 @@ namespace DepoApp
                 {
                     products = products.Where(p => p.category.id == (int)cmbBxProductsTabCategories.SelectedValue).ToList();
                 }
+                if (txtBxBarcodeProducts.Text != "")
+                {
+                    products = products.Where(p => p.barcode == txtBxBarcodeProducts.Text).ToList();
+                }
 
                 dataGridViewProducts.Rows.Clear();
 
@@ -115,6 +129,15 @@ namespace DepoApp
             }
 
         }
+
+        // Barcode search textbox
+        private void txtBxBarcodeProducts_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).Text = "";
+            scannerTextBox = ((TextBox)sender);
+            videoCaptureDevice.Start();
+        }
+
         #endregion
 
 
@@ -243,16 +266,19 @@ namespace DepoApp
 
                         // Delete from datagridview
                         dataGridViewStorages.Rows.RemoveAt(dataGridViewStorages.SelectedRows[0].Index);
-                    } else
+                    }
+                    else
                     {
                         MessageBox.Show("Depo silinirken bir hata oluþtu.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    
-                } catch (Exception ex)
+
+                }
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            } else
+            }
+            else
             {
                 MessageBox.Show("Lütfen bir depo seçiniz.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -488,6 +514,7 @@ namespace DepoApp
         {
             // Attention: Search term is lowercased
             string searchTerm = (txtBxSearchProductName.Text.Trim()).ToLower();
+            string barcode = (txtBxBarcodeStorageItem.Text.Trim());
             using (DepoDbContext db = new DepoDbContext())
             {
                 var storageItems = db.StorageItems.Include(s => s.product).Include(s => s.storage).Include(s => s.product.category).ToList();
@@ -503,6 +530,10 @@ namespace DepoApp
                 {
                     storageItems = storageItems.Where(s => s.product.category.id == (int)cmbBxCategories.SelectedValue).ToList();
                 }
+                if (barcode != "")
+                {
+                    storageItems = storageItems.Where(s => s.product.barcode == barcode).ToList();
+                }
 
 
                 dataGridViewStorage.Rows.Clear();
@@ -512,6 +543,15 @@ namespace DepoApp
                     dataGridViewStorage.Rows.Add(storageitem.id, storageitem.product.name, storageitem.count + " " + storageitem.product.getMeasurementType(), storageitem.storage.name);
                 }
             }
+        }
+
+        private void txtBxBarcodeStorageItem_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).Text = "";
+            scannerTextBox = ((TextBox)sender);
+            videoCaptureDevice = new VideoCaptureDevice(filterInfoCollection[0].MonikerString);
+            videoCaptureDevice.NewFrame += VideoCaptureDevice_BarcodeFrame;
+            videoCaptureDevice.Start();
         }
         #endregion
 
@@ -528,15 +568,15 @@ namespace DepoApp
 
         #region MENU STRIP AREA
 
-            #region PRODUCT STOCK AREA
+        #region PRODUCT STOCK AREA
 
-            private void ürünStokRaporlarýToolStripMenuItem_Click(object sender, EventArgs e)
-            {
-                InventoryReport inventoryReport = new InventoryReport();
-                inventoryReport.ShowDialog();
-            }
+        private void ürünStokRaporlarýToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InventoryReport inventoryReport = new InventoryReport();
+            inventoryReport.ShowDialog();
+        }
 
-            #endregion
+        #endregion
         #endregion
 
         #region UTILITY METHODS
@@ -686,12 +726,33 @@ namespace DepoApp
                 cmbBxProductsTabCategories.ValueMember = "id";
             }
         }
+
+        public void VideoCaptureDevice_BarcodeFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
+        {
+            Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
+            var reader = new ZXing.Windows.Compatibility.BarcodeReader();
+            reader.Options.PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.UPC_A, ZXing.BarcodeFormat.EAN_13 };
+
+            var result = reader.Decode(bitmap);
+            if (result != null)
+            {
+                scannerTextBox.Invoke(new MethodInvoker(delegate ()
+                {
+                    scannerTextBox.Text = result.ToString();
+                    videoCaptureDevice.SignalToStop();
+                }));
+            }
+        }
         #endregion
 
 
 
 
 
-        
+
+
+
+
+    
     }
 }
