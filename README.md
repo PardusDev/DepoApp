@@ -38,7 +38,7 @@ Here are the desired features in the program:
 * Adding Products in Different Units of Measurement
 * Sales and Revenue Generation
 * Income-Expense Report
-* Barcode Scanning (Not Completed)
+* Barcode Scanning
 * Different User Logins (Not Completed)
 * Output in PDF Format (Not Completed)
 
@@ -63,7 +63,7 @@ This is an example of how to list things you need to use the software.
 
 
 ```sh
-git clone https://github.com/your_username_/Project-Name.git
+git clone https://github.com/PardusDev/DepoApp.git
 ```
 
 
