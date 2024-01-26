@@ -62,18 +62,13 @@ namespace DepoApp.UI
             Product selectedProduct = (Product)cmbBxProducts.SelectedItem;
             int itemCount = 0;
 
-            DateTime min_date;
-            DateTime max_date;
+            DateTime min_date = DateTime.Now;
+            DateTime max_date = DateTime.Now;
 
             var objChart = chart1.ChartAreas[0];
             objChart.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-            // Month 1-12
-            //objChart.AxisX.Minimum = 1;
-            //objChart.AxisX.Maximum = 12;
 
             objChart.AxisY.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-            //objChart.AxisY.Minimum = -50;
-            //objChart.AxisY.Maximum = 50;
 
             chart1.Series.Clear();
             Random random = new Random();
@@ -83,6 +78,7 @@ namespace DepoApp.UI
             chart1.Series[selectedProduct.name].Legend = "Legend1";
             chart1.Series[selectedProduct.name].ChartArea = "ChartArea1";
             chart1.Series[selectedProduct.name].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            chart1.Series[selectedProduct.name].BorderWidth = 3;
 
             foreach (StorageItemLog log in allLogs)
             {

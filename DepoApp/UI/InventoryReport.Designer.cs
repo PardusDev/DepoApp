@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             panel1 = new Panel();
             cmbBxProducts = new ComboBox();
             button1 = new Button();
             chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             dataGridViewRestock = new DataGridView();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            RestockDate = new DataGridViewTextBoxColumn();
             dataGridViewSales = new DataGridView();
             saleId = new DataGridViewTextBoxColumn();
             saleProductName = new DataGridViewTextBoxColumn();
             saleCount = new DataGridViewTextBoxColumn();
             saleDate = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            RestockDate = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewRestock).BeginInit();
@@ -65,27 +65,27 @@
             // cmbBxProducts
             // 
             cmbBxProducts.FormattingEnabled = true;
-            cmbBxProducts.Location = new Point(374, 389);
+            cmbBxProducts.Location = new Point(304, 402);
             cmbBxProducts.Name = "cmbBxProducts";
-            cmbBxProducts.Size = new Size(121, 23);
+            cmbBxProducts.Size = new Size(167, 23);
             cmbBxProducts.TabIndex = 4;
             // 
             // button1
             // 
-            button1.Location = new Point(351, 442);
+            button1.Location = new Point(304, 458);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(167, 23);
             button1.TabIndex = 3;
-            button1.Text = "button1";
+            button1.Text = "Grafiğini Getir";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            chart1.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            chart1.Legends.Add(legend2);
             chart1.Location = new Point(0, 0);
             chart1.Name = "chart1";
             chart1.Size = new Size(776, 262);
@@ -99,11 +99,35 @@
             dataGridViewRestock.AllowUserToOrderColumns = true;
             dataGridViewRestock.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewRestock.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, RestockDate });
-            dataGridViewRestock.Location = new Point(505, 288);
+            dataGridViewRestock.Location = new Point(478, 291);
             dataGridViewRestock.Name = "dataGridViewRestock";
             dataGridViewRestock.ReadOnly = true;
-            dataGridViewRestock.Size = new Size(344, 190);
+            dataGridViewRestock.Size = new Size(298, 190);
             dataGridViewRestock.TabIndex = 1;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.HeaderText = "id";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.HeaderText = "Ürün Adı";
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.HeaderText = "Alış Adedi";
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // RestockDate
+            // 
+            RestockDate.HeaderText = "Tarih";
+            RestockDate.Name = "RestockDate";
+            RestockDate.ReadOnly = true;
             // 
             // dataGridViewSales
             // 
@@ -115,7 +139,7 @@
             dataGridViewSales.Location = new Point(0, 291);
             dataGridViewSales.Name = "dataGridViewSales";
             dataGridViewSales.ReadOnly = true;
-            dataGridViewSales.Size = new Size(344, 190);
+            dataGridViewSales.Size = new Size(298, 190);
             dataGridViewSales.TabIndex = 0;
             // 
             // saleId
@@ -142,30 +166,6 @@
             saleDate.Name = "saleDate";
             saleDate.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewTextBoxColumn1.HeaderText = "id";
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.HeaderText = "Ürün Adı";
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.HeaderText = "Alış Adedi";
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // RestockDate
-            // 
-            RestockDate.HeaderText = "Tarih";
-            RestockDate.Name = "RestockDate";
-            RestockDate.ReadOnly = true;
-            // 
             // InventoryReport
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -174,7 +174,7 @@
             Controls.Add(panel1);
             Name = "InventoryReport";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "InventoryReport";
+            Text = "Stok Raporu";
             Load += InventoryReport_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
