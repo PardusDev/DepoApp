@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             tabControl1 = new TabControl();
             tabPage5 = new TabPage();
             button8 = new Button();
@@ -114,85 +115,75 @@
             // 
             // tabControl1
             // 
+            resources.ApplyResources(tabControl1, "tabControl1");
             tabControl1.Controls.Add(tabPage5);
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage4);
-            tabControl1.ItemSize = new Size(68, 20);
-            tabControl1.Location = new Point(0, 27);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(797, 496);
-            tabControl1.TabIndex = 1;
             // 
             // tabPage5
             // 
+            resources.ApplyResources(tabPage5, "tabPage5");
             tabPage5.Controls.Add(button8);
             tabPage5.Controls.Add(dataGridViewSales);
-            tabPage5.Location = new Point(4, 24);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(789, 468);
-            tabPage5.TabIndex = 4;
-            tabPage5.Text = "Satışlar";
             tabPage5.UseVisualStyleBackColor = true;
             // 
             // button8
             // 
-            button8.Location = new Point(477, 421);
+            resources.ApplyResources(button8, "button8");
             button8.Name = "button8";
-            button8.Size = new Size(121, 40);
-            button8.TabIndex = 2;
-            button8.Text = "Yeni Satış Gir";
             button8.UseVisualStyleBackColor = true;
             button8.Click += button8_Click;
             // 
             // dataGridViewSales
             // 
+            resources.ApplyResources(dataGridViewSales, "dataGridViewSales");
             dataGridViewSales.AllowUserToAddRows = false;
             dataGridViewSales.AllowUserToDeleteRows = false;
             dataGridViewSales.AllowUserToOrderColumns = true;
             dataGridViewSales.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewSales.Columns.AddRange(new DataGridViewColumn[] { saleId, saleProduct, saleStorage, saleCount, salePrice });
-            dataGridViewSales.Location = new Point(0, 83);
             dataGridViewSales.Name = "dataGridViewSales";
             dataGridViewSales.ReadOnly = true;
             dataGridViewSales.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewSales.Size = new Size(789, 333);
-            dataGridViewSales.TabIndex = 0;
             // 
             // saleId
             // 
-            saleId.HeaderText = "id";
+            resources.ApplyResources(saleId, "saleId");
             saleId.Name = "saleId";
             saleId.ReadOnly = true;
             // 
             // saleProduct
             // 
-            saleProduct.HeaderText = "Ürün Adı";
+            resources.ApplyResources(saleProduct, "saleProduct");
             saleProduct.Name = "saleProduct";
             saleProduct.ReadOnly = true;
             // 
             // saleStorage
             // 
-            saleStorage.HeaderText = "Depo";
+            resources.ApplyResources(saleStorage, "saleStorage");
             saleStorage.Name = "saleStorage";
             saleStorage.ReadOnly = true;
             // 
             // saleCount
             // 
-            saleCount.HeaderText = "Adet/Kg/Lt";
+            resources.ApplyResources(saleCount, "saleCount");
             saleCount.Name = "saleCount";
             saleCount.ReadOnly = true;
             // 
             // salePrice
             // 
-            salePrice.HeaderText = "Toplam Fiyat";
+            resources.ApplyResources(salePrice, "salePrice");
             salePrice.Name = "salePrice";
             salePrice.ReadOnly = true;
             // 
             // tabPage1
             // 
+            resources.ApplyResources(tabPage1, "tabPage1");
             tabPage1.Controls.Add(txtBxBarcodeStorageItem);
             tabPage1.Controls.Add(cmbBxCategories);
             tabPage1.Controls.Add(button6);
@@ -203,140 +194,107 @@
             tabPage1.Controls.Add(button2);
             tabPage1.Controls.Add(btnAddNewProductToStorage);
             tabPage1.Controls.Add(dataGridViewStorage);
-            tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(789, 468);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "Depo";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // txtBxBarcodeStorageItem
             // 
-            txtBxBarcodeStorageItem.Location = new Point(73, 38);
+            resources.ApplyResources(txtBxBarcodeStorageItem, "txtBxBarcodeStorageItem");
             txtBxBarcodeStorageItem.Name = "txtBxBarcodeStorageItem";
-            txtBxBarcodeStorageItem.PlaceholderText = "Barkod Okutmak İçin Tıklayın";
-            txtBxBarcodeStorageItem.Size = new Size(170, 23);
-            txtBxBarcodeStorageItem.TabIndex = 9;
             txtBxBarcodeStorageItem.Click += txtBxBarcodeStorageItem_Click;
             // 
             // cmbBxCategories
             // 
+            resources.ApplyResources(cmbBxCategories, "cmbBxCategories");
             cmbBxCategories.FormattingEnabled = true;
-            cmbBxCategories.Items.AddRange(new object[] { "Tüm Depolar" });
-            cmbBxCategories.Location = new Point(421, 9);
+            cmbBxCategories.Items.AddRange(new object[] { resources.GetString("cmbBxCategories.Items") });
             cmbBxCategories.Name = "cmbBxCategories";
-            cmbBxCategories.Size = new Size(140, 23);
-            cmbBxCategories.TabIndex = 8;
             // 
             // button6
             // 
-            button6.Location = new Point(591, 9);
+            resources.ApplyResources(button6, "button6");
             button6.Name = "button6";
-            button6.Size = new Size(89, 23);
-            button6.TabIndex = 7;
-            button6.Text = "Arama Yap";
             button6.UseVisualStyleBackColor = true;
             button6.Click += button6_Click;
             // 
             // cmbBxStorages
             // 
+            resources.ApplyResources(cmbBxStorages, "cmbBxStorages");
             cmbBxStorages.FormattingEnabled = true;
-            cmbBxStorages.Items.AddRange(new object[] { "Tüm Depolar" });
-            cmbBxStorages.Location = new Point(263, 9);
+            cmbBxStorages.Items.AddRange(new object[] { resources.GetString("cmbBxStorages.Items") });
             cmbBxStorages.Name = "cmbBxStorages";
-            cmbBxStorages.Size = new Size(140, 23);
-            cmbBxStorages.TabIndex = 6;
             // 
             // txtBxSearchProductName
             // 
-            txtBxSearchProductName.Location = new Point(73, 9);
+            resources.ApplyResources(txtBxSearchProductName, "txtBxSearchProductName");
             txtBxSearchProductName.Name = "txtBxSearchProductName";
-            txtBxSearchProductName.PlaceholderText = "Ürün Adı";
-            txtBxSearchProductName.Size = new Size(170, 23);
-            txtBxSearchProductName.TabIndex = 5;
             // 
             // label7
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(0, 12);
+            resources.ApplyResources(label7, "label7");
             label7.Name = "label7";
-            label7.Size = new Size(67, 15);
-            label7.TabIndex = 4;
-            label7.Text = "Arama Yap:";
             // 
             // button3
             // 
+            resources.ApplyResources(button3, "button3");
             button3.BackColor = Color.Transparent;
-            button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button3.Location = new Point(591, 421);
             button3.Name = "button3";
-            button3.Size = new Size(121, 40);
-            button3.TabIndex = 3;
-            button3.Text = "Ürünü Depodan Sil";
             button3.UseVisualStyleBackColor = false;
             button3.Click += button3_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(464, 421);
+            resources.ApplyResources(button2, "button2");
             button2.Name = "button2";
-            button2.Size = new Size(121, 40);
-            button2.TabIndex = 2;
-            button2.Text = "Stok Sayısını Güncelle";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
             // btnAddNewProductToStorage
             // 
-            btnAddNewProductToStorage.Location = new Point(337, 421);
+            resources.ApplyResources(btnAddNewProductToStorage, "btnAddNewProductToStorage");
             btnAddNewProductToStorage.Name = "btnAddNewProductToStorage";
-            btnAddNewProductToStorage.Size = new Size(121, 40);
-            btnAddNewProductToStorage.TabIndex = 1;
-            btnAddNewProductToStorage.Text = "Depoya Yeni Ürün Ekle";
             btnAddNewProductToStorage.UseVisualStyleBackColor = true;
             btnAddNewProductToStorage.Click += btnAddNewProductToStorage_Click;
             // 
             // dataGridViewStorage
             // 
+            resources.ApplyResources(dataGridViewStorage, "dataGridViewStorage");
             dataGridViewStorage.AllowUserToAddRows = false;
             dataGridViewStorage.AllowUserToDeleteRows = false;
             dataGridViewStorage.AllowUserToOrderColumns = true;
             dataGridViewStorage.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewStorage.Columns.AddRange(new DataGridViewColumn[] { idStorage, productNameStorage, countProductStorage, storageItemStorageName });
-            dataGridViewStorage.Location = new Point(0, 83);
             dataGridViewStorage.Name = "dataGridViewStorage";
             dataGridViewStorage.ReadOnly = true;
             dataGridViewStorage.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewStorage.Size = new Size(789, 333);
-            dataGridViewStorage.TabIndex = 0;
             // 
             // idStorage
             // 
-            idStorage.HeaderText = "id";
+            resources.ApplyResources(idStorage, "idStorage");
             idStorage.Name = "idStorage";
             idStorage.ReadOnly = true;
             // 
             // productNameStorage
             // 
-            productNameStorage.HeaderText = "Ürün Adı";
+            resources.ApplyResources(productNameStorage, "productNameStorage");
             productNameStorage.Name = "productNameStorage";
             productNameStorage.ReadOnly = true;
             // 
             // countProductStorage
             // 
-            countProductStorage.HeaderText = "Ürün Stoğu";
+            resources.ApplyResources(countProductStorage, "countProductStorage");
             countProductStorage.Name = "countProductStorage";
             countProductStorage.ReadOnly = true;
             // 
             // storageItemStorageName
             // 
-            storageItemStorageName.HeaderText = "Depo";
+            resources.ApplyResources(storageItemStorageName, "storageItemStorageName");
             storageItemStorageName.Name = "storageItemStorageName";
             storageItemStorageName.ReadOnly = true;
             // 
             // tabPage2
             // 
+            resources.ApplyResources(tabPage2, "tabPage2");
             tabPage2.Controls.Add(txtBxBarcodeProducts);
             tabPage2.Controls.Add(button7);
             tabPage2.Controls.Add(cmbBxProductsTabCategories);
@@ -345,119 +303,92 @@
             tabPage2.Controls.Add(button1);
             tabPage2.Controls.Add(dataGridViewProducts);
             tabPage2.Controls.Add(btnAddNewProduct);
-            tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(789, 468);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Ürünler";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // txtBxBarcodeProducts
             // 
-            txtBxBarcodeProducts.Location = new Point(71, 36);
+            resources.ApplyResources(txtBxBarcodeProducts, "txtBxBarcodeProducts");
             txtBxBarcodeProducts.Name = "txtBxBarcodeProducts";
-            txtBxBarcodeProducts.PlaceholderText = "Barkod Okutmak İçin Tıklayın";
-            txtBxBarcodeProducts.Size = new Size(170, 23);
-            txtBxBarcodeProducts.TabIndex = 12;
             txtBxBarcodeProducts.Click += txtBxBarcodeProducts_Click;
             // 
             // button7
             // 
-            button7.Location = new Point(426, 7);
+            resources.ApplyResources(button7, "button7");
             button7.Name = "button7";
-            button7.Size = new Size(89, 23);
-            button7.TabIndex = 11;
-            button7.Text = "Arama Yap";
             button7.UseVisualStyleBackColor = true;
             button7.Click += button7_Click;
             // 
             // cmbBxProductsTabCategories
             // 
+            resources.ApplyResources(cmbBxProductsTabCategories, "cmbBxProductsTabCategories");
             cmbBxProductsTabCategories.FormattingEnabled = true;
-            cmbBxProductsTabCategories.Items.AddRange(new object[] { "Tüm Depolar" });
-            cmbBxProductsTabCategories.Location = new Point(261, 7);
+            cmbBxProductsTabCategories.Items.AddRange(new object[] { resources.GetString("cmbBxProductsTabCategories.Items") });
             cmbBxProductsTabCategories.Name = "cmbBxProductsTabCategories";
-            cmbBxProductsTabCategories.Size = new Size(140, 23);
-            cmbBxProductsTabCategories.TabIndex = 10;
             // 
             // txtBxProductsTab
             // 
-            txtBxProductsTab.Location = new Point(71, 7);
+            resources.ApplyResources(txtBxProductsTab, "txtBxProductsTab");
             txtBxProductsTab.Name = "txtBxProductsTab";
-            txtBxProductsTab.PlaceholderText = "Ürün Adı";
-            txtBxProductsTab.Size = new Size(170, 23);
-            txtBxProductsTab.TabIndex = 9;
             // 
             // label10
             // 
-            label10.AutoSize = true;
-            label10.Location = new Point(-2, 10);
+            resources.ApplyResources(label10, "label10");
             label10.Name = "label10";
-            label10.Size = new Size(67, 15);
-            label10.TabIndex = 8;
-            label10.Text = "Arama Yap:";
             // 
             // button1
             // 
-            button1.Location = new Point(484, 422);
+            resources.ApplyResources(button1, "button1");
             button1.Name = "button1";
-            button1.Size = new Size(108, 39);
-            button1.TabIndex = 4;
-            button1.Text = "Seçili Ürünü Sil";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
             // dataGridViewProducts
             // 
+            resources.ApplyResources(dataGridViewProducts, "dataGridViewProducts");
             dataGridViewProducts.AllowUserToAddRows = false;
             dataGridViewProducts.AllowUserToDeleteRows = false;
             dataGridViewProducts.AllowUserToOrderColumns = true;
             dataGridViewProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewProducts.Columns.AddRange(new DataGridViewColumn[] { id, name, productCategory, productMeasurement });
-            dataGridViewProducts.Location = new Point(0, 83);
             dataGridViewProducts.Name = "dataGridViewProducts";
             dataGridViewProducts.ReadOnly = true;
             dataGridViewProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewProducts.Size = new Size(789, 333);
-            dataGridViewProducts.TabIndex = 3;
             // 
             // id
             // 
-            id.HeaderText = "id";
+            resources.ApplyResources(id, "id");
             id.Name = "id";
             id.ReadOnly = true;
             // 
             // name
             // 
-            name.HeaderText = "Ürün Adı";
+            resources.ApplyResources(name, "name");
             name.Name = "name";
             name.ReadOnly = true;
             // 
             // productCategory
             // 
-            productCategory.HeaderText = "Kategori";
+            resources.ApplyResources(productCategory, "productCategory");
             productCategory.Name = "productCategory";
             productCategory.ReadOnly = true;
             // 
             // productMeasurement
             // 
-            productMeasurement.HeaderText = "Ölçü Şekli";
+            resources.ApplyResources(productMeasurement, "productMeasurement");
             productMeasurement.Name = "productMeasurement";
             productMeasurement.ReadOnly = true;
             // 
             // btnAddNewProduct
             // 
-            btnAddNewProduct.Location = new Point(370, 422);
+            resources.ApplyResources(btnAddNewProduct, "btnAddNewProduct");
             btnAddNewProduct.Name = "btnAddNewProduct";
-            btnAddNewProduct.Size = new Size(108, 39);
-            btnAddNewProduct.TabIndex = 2;
-            btnAddNewProduct.Text = "Yeni Ürün Ekle";
             btnAddNewProduct.UseVisualStyleBackColor = true;
             btnAddNewProduct.Click += btnAddNewProduct_Click;
             // 
             // tabPage3
             // 
+            resources.ApplyResources(tabPage3, "tabPage3");
             tabPage3.Controls.Add(label9);
             tabPage3.Controls.Add(label3);
             tabPage3.Controls.Add(label1);
@@ -465,107 +396,72 @@
             tabPage3.Controls.Add(btnAddNewStorage);
             tabPage3.Controls.Add(txtBxStorageName);
             tabPage3.Controls.Add(dataGridViewStorages);
-            tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
-            tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(789, 468);
-            tabPage3.TabIndex = 2;
-            tabPage3.Text = "Depolar";
             tabPage3.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
-            label9.AutoSize = true;
-            label9.Location = new Point(368, 272);
+            resources.ApplyResources(label9, "label9");
             label9.Name = "label9";
-            label9.Size = new Size(53, 15);
-            label9.TabIndex = 8;
-            label9.Text = "Güncelle";
             // 
             // label3
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(364, 13);
+            resources.ApplyResources(label3, "label3");
             label3.Name = "label3";
-            label3.Size = new Size(59, 15);
-            label3.TabIndex = 7;
-            label3.Text = "Depo Adı:";
             // 
             // label1
             // 
-            label1.Location = new Point(364, 399);
+            resources.ApplyResources(label1, "label1");
             label1.Name = "label1";
-            label1.Size = new Size(408, 20);
-            label1.TabIndex = 4;
-            label1.Text = "Lütfen bir işlem yapmak için listeden seçim yapınız.";
             // 
             // panel1
             // 
+            resources.ApplyResources(panel1, "panel1");
             panel1.Controls.Add(button10);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(btnUpdateStorage);
             panel1.Controls.Add(txtBxStorageUpdate);
-            panel1.Location = new Point(364, 266);
             panel1.Name = "panel1";
-            panel1.Size = new Size(408, 115);
-            panel1.TabIndex = 3;
-            panel1.Visible = false;
             // 
             // button10
             // 
-            button10.Location = new Point(4, 81);
+            resources.ApplyResources(button10, "button10");
             button10.Name = "button10";
-            button10.Size = new Size(130, 31);
-            button10.TabIndex = 7;
-            button10.Text = "Depoyu Sil";
             button10.UseVisualStyleBackColor = true;
             button10.Click += button10_Click;
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(4, 34);
+            resources.ApplyResources(label2, "label2");
             label2.Name = "label2";
-            label2.Size = new Size(59, 15);
-            label2.TabIndex = 6;
-            label2.Text = "Depo Adı:";
             // 
             // btnUpdateStorage
             // 
-            btnUpdateStorage.Location = new Point(275, 81);
+            resources.ApplyResources(btnUpdateStorage, "btnUpdateStorage");
             btnUpdateStorage.Name = "btnUpdateStorage";
-            btnUpdateStorage.Size = new Size(130, 31);
-            btnUpdateStorage.TabIndex = 5;
-            btnUpdateStorage.Text = "Depoyu Güncelle";
             btnUpdateStorage.UseVisualStyleBackColor = true;
             btnUpdateStorage.Click += btnUpdateStorage_Click;
             // 
             // txtBxStorageUpdate
             // 
-            txtBxStorageUpdate.Location = new Point(4, 52);
+            resources.ApplyResources(txtBxStorageUpdate, "txtBxStorageUpdate");
             txtBxStorageUpdate.Name = "txtBxStorageUpdate";
-            txtBxStorageUpdate.Size = new Size(401, 23);
-            txtBxStorageUpdate.TabIndex = 0;
             // 
             // btnAddNewStorage
             // 
-            btnAddNewStorage.Location = new Point(639, 60);
+            resources.ApplyResources(btnAddNewStorage, "btnAddNewStorage");
             btnAddNewStorage.Name = "btnAddNewStorage";
-            btnAddNewStorage.Size = new Size(133, 31);
-            btnAddNewStorage.TabIndex = 2;
-            btnAddNewStorage.Text = "Yeni Depo Ekle";
             btnAddNewStorage.UseVisualStyleBackColor = true;
             btnAddNewStorage.Click += button4_Click;
             // 
             // txtBxStorageName
             // 
-            txtBxStorageName.Location = new Point(364, 31);
+            resources.ApplyResources(txtBxStorageName, "txtBxStorageName");
             txtBxStorageName.Name = "txtBxStorageName";
-            txtBxStorageName.Size = new Size(408, 23);
-            txtBxStorageName.TabIndex = 1;
             // 
             // dataGridViewStorages
             // 
+            resources.ApplyResources(dataGridViewStorages, "dataGridViewStorages");
             dataGridViewStorages.AllowUserToAddRows = false;
             dataGridViewStorages.AllowUserToDeleteRows = false;
             dataGridViewStorages.AllowUserToOrderColumns = true;
@@ -574,28 +470,26 @@
             dataGridViewStorages.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewStorages.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewStorages.Columns.AddRange(new DataGridViewColumn[] { storageId, storageName });
-            dataGridViewStorages.Location = new Point(0, 0);
             dataGridViewStorages.Name = "dataGridViewStorages";
             dataGridViewStorages.ReadOnly = true;
             dataGridViewStorages.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewStorages.Size = new Size(340, 424);
-            dataGridViewStorages.TabIndex = 0;
             dataGridViewStorages.SelectionChanged += dataGridViewStorages_SelectionChanged;
             // 
             // storageId
             // 
-            storageId.HeaderText = "id";
+            resources.ApplyResources(storageId, "storageId");
             storageId.Name = "storageId";
             storageId.ReadOnly = true;
             // 
             // storageName
             // 
-            storageName.HeaderText = "Depo Adı";
+            resources.ApplyResources(storageName, "storageName");
             storageName.Name = "storageName";
             storageName.ReadOnly = true;
             // 
             // tabPage4
             // 
+            resources.ApplyResources(tabPage4, "tabPage4");
             tabPage4.Controls.Add(label8);
             tabPage4.Controls.Add(label6);
             tabPage4.Controls.Add(panel2);
@@ -603,160 +497,117 @@
             tabPage4.Controls.Add(label4);
             tabPage4.Controls.Add(txtBxCategoryNew);
             tabPage4.Controls.Add(dataGridViewCategories);
-            tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(789, 468);
-            tabPage4.TabIndex = 3;
-            tabPage4.Text = "Kategoriler";
             tabPage4.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(354, 282);
+            resources.ApplyResources(label8, "label8");
             label8.Name = "label8";
-            label8.Size = new Size(53, 15);
-            label8.TabIndex = 6;
-            label8.Text = "Güncelle";
             // 
             // label6
             // 
-            label6.Location = new Point(354, 400);
+            resources.ApplyResources(label6, "label6");
             label6.Name = "label6";
-            label6.Size = new Size(408, 20);
-            label6.TabIndex = 5;
-            label6.Text = "Lütfen bir işlem yapmak için listeden seçim yapınız.";
             // 
             // panel2
             // 
+            resources.ApplyResources(panel2, "panel2");
             panel2.Controls.Add(button9);
             panel2.Controls.Add(button5);
             panel2.Controls.Add(txtBxCategoryUpdate);
             panel2.Controls.Add(label5);
-            panel2.Location = new Point(354, 273);
             panel2.Name = "panel2";
-            panel2.Size = new Size(420, 119);
-            panel2.TabIndex = 4;
-            panel2.Visible = false;
             // 
             // button9
             // 
-            button9.Location = new Point(0, 90);
+            resources.ApplyResources(button9, "button9");
             button9.Name = "button9";
-            button9.Size = new Size(94, 23);
-            button9.TabIndex = 8;
-            button9.Text = "Kategoriyi Sil";
             button9.UseVisualStyleBackColor = true;
             button9.Click += button9_Click;
             // 
             // button5
             // 
-            button5.Location = new Point(294, 90);
+            resources.ApplyResources(button5, "button5");
             button5.Name = "button5";
-            button5.Size = new Size(126, 23);
-            button5.TabIndex = 7;
-            button5.Text = "Kategoriyi Güncelle";
             button5.UseVisualStyleBackColor = true;
             button5.Click += button5_Click;
             // 
             // txtBxCategoryUpdate
             // 
-            txtBxCategoryUpdate.Location = new Point(0, 61);
+            resources.ApplyResources(txtBxCategoryUpdate, "txtBxCategoryUpdate");
             txtBxCategoryUpdate.Name = "txtBxCategoryUpdate";
-            txtBxCategoryUpdate.Size = new Size(420, 23);
-            txtBxCategoryUpdate.TabIndex = 5;
             // 
             // label5
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(0, 43);
+            resources.ApplyResources(label5, "label5");
             label5.Name = "label5";
-            label5.Size = new Size(75, 15);
-            label5.TabIndex = 6;
-            label5.Text = "Kategori Adı:";
             // 
             // button4
             // 
-            button4.Location = new Point(648, 63);
+            resources.ApplyResources(button4, "button4");
             button4.Name = "button4";
-            button4.Size = new Size(126, 23);
-            button4.TabIndex = 3;
-            button4.Text = "Kategoriyi Ekle";
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click_1;
             // 
             // label4
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(354, 16);
+            resources.ApplyResources(label4, "label4");
             label4.Name = "label4";
-            label4.Size = new Size(75, 15);
-            label4.TabIndex = 2;
-            label4.Text = "Kategori Adı:";
             // 
             // txtBxCategoryNew
             // 
-            txtBxCategoryNew.Location = new Point(354, 34);
+            resources.ApplyResources(txtBxCategoryNew, "txtBxCategoryNew");
             txtBxCategoryNew.Name = "txtBxCategoryNew";
-            txtBxCategoryNew.Size = new Size(420, 23);
-            txtBxCategoryNew.TabIndex = 1;
             // 
             // dataGridViewCategories
             // 
+            resources.ApplyResources(dataGridViewCategories, "dataGridViewCategories");
             dataGridViewCategories.AllowUserToAddRows = false;
             dataGridViewCategories.AllowUserToDeleteRows = false;
             dataGridViewCategories.AllowUserToOrderColumns = true;
             dataGridViewCategories.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCategories.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCategories.Columns.AddRange(new DataGridViewColumn[] { categoryId, categoryName });
-            dataGridViewCategories.Location = new Point(0, 0);
             dataGridViewCategories.Name = "dataGridViewCategories";
             dataGridViewCategories.ReadOnly = true;
             dataGridViewCategories.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewCategories.Size = new Size(340, 420);
-            dataGridViewCategories.TabIndex = 0;
             dataGridViewCategories.SelectionChanged += dataGridViewCategories_SelectionChanged;
             // 
             // categoryId
             // 
-            categoryId.HeaderText = "id";
+            resources.ApplyResources(categoryId, "categoryId");
             categoryId.Name = "categoryId";
             categoryId.ReadOnly = true;
             // 
             // categoryName
             // 
-            categoryName.HeaderText = "Kategori Adı";
+            resources.ApplyResources(categoryName, "categoryName");
             categoryName.Name = "categoryName";
             categoryName.ReadOnly = true;
             // 
             // menuStrip1
             // 
+            resources.ApplyResources(menuStrip1, "menuStrip1");
             menuStrip1.Items.AddRange(new ToolStripItem[] { raporlarToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
-            menuStrip1.TabIndex = 2;
-            menuStrip1.Text = "menuStrip1";
             // 
             // raporlarToolStripMenuItem
             // 
+            resources.ApplyResources(raporlarToolStripMenuItem, "raporlarToolStripMenuItem");
             raporlarToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ürünStokRaporlarıToolStripMenuItem });
             raporlarToolStripMenuItem.Name = "raporlarToolStripMenuItem";
-            raporlarToolStripMenuItem.Size = new Size(63, 20);
-            raporlarToolStripMenuItem.Text = "Raporlar";
             // 
             // ürünStokRaporlarıToolStripMenuItem
             // 
+            resources.ApplyResources(ürünStokRaporlarıToolStripMenuItem, "ürünStokRaporlarıToolStripMenuItem");
             ürünStokRaporlarıToolStripMenuItem.Name = "ürünStokRaporlarıToolStripMenuItem";
-            ürünStokRaporlarıToolStripMenuItem.Size = new Size(167, 22);
-            ürünStokRaporlarıToolStripMenuItem.Text = "Ürün Stok Raporu";
             ürünStokRaporlarıToolStripMenuItem.Click += ürünStokRaporlarıToolStripMenuItem_Click;
             // 
             // Home
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 524);
             Controls.Add(tabControl1);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -764,8 +615,6 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "Home";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Depo";
             Load += Home_Load;
             tabControl1.ResumeLayout(false);
             tabPage5.ResumeLayout(false);
@@ -813,8 +662,6 @@
         private Label label3;
         private TabPage tabPage4;
         private DataGridView dataGridViewCategories;
-        private DataGridViewTextBoxColumn categoryId;
-        private DataGridViewTextBoxColumn categoryName;
         private Label label6;
         private Panel panel2;
         private Button button5;
@@ -823,14 +670,6 @@
         private Button button4;
         private Label label4;
         private TextBox txtBxCategoryNew;
-        private DataGridViewTextBoxColumn id;
-        private DataGridViewTextBoxColumn name;
-        private DataGridViewTextBoxColumn productCategory;
-        private DataGridViewTextBoxColumn productMeasurement;
-        private DataGridViewTextBoxColumn idStorage;
-        private DataGridViewTextBoxColumn productNameStorage;
-        private DataGridViewTextBoxColumn countProductStorage;
-        private DataGridViewTextBoxColumn storageItemStorageName;
         private TextBox txtBxSearchProductName;
         private Label label7;
         private Button button6;
@@ -840,11 +679,6 @@
         private Label label8;
         private TabPage tabPage5;
         private DataGridView dataGridViewSales;
-        private DataGridViewTextBoxColumn saleId;
-        private DataGridViewTextBoxColumn saleProduct;
-        private DataGridViewTextBoxColumn saleStorage;
-        private DataGridViewTextBoxColumn saleCount;
-        private DataGridViewTextBoxColumn salePrice;
         private Button button8;
         private Button button7;
         private ComboBox cmbBxProductsTabCategories;
@@ -856,10 +690,25 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem raporlarToolStripMenuItem;
         private ToolStripMenuItem ürünStokRaporlarıToolStripMenuItem;
-        private DataGridViewTextBoxColumn storageId;
-        private DataGridViewTextBoxColumn storageName;
         private Button button10;
         private TextBox txtBxBarcodeProducts;
         private TextBox txtBxBarcodeStorageItem;
+        private DataGridViewTextBoxColumn saleId;
+        private DataGridViewTextBoxColumn saleProduct;
+        private DataGridViewTextBoxColumn saleStorage;
+        private DataGridViewTextBoxColumn saleCount;
+        private DataGridViewTextBoxColumn salePrice;
+        private DataGridViewTextBoxColumn categoryId;
+        private DataGridViewTextBoxColumn categoryName;
+        private DataGridViewTextBoxColumn storageId;
+        private DataGridViewTextBoxColumn storageName;
+        private DataGridViewTextBoxColumn id;
+        private DataGridViewTextBoxColumn name;
+        private DataGridViewTextBoxColumn productCategory;
+        private DataGridViewTextBoxColumn productMeasurement;
+        private DataGridViewTextBoxColumn idStorage;
+        private DataGridViewTextBoxColumn productNameStorage;
+        private DataGridViewTextBoxColumn countProductStorage;
+        private DataGridViewTextBoxColumn storageItemStorageName;
     }
 }

@@ -22,12 +22,21 @@ namespace DepoApp.UI
         CurrencyTextBox currencyTextBox = new CurrencyTextBox();
         StorageItemLogManager storageItemLogManager = new StorageItemLogManager();
 
-        public AddSale()
+        Home home;
+
+        public AddSale(Home home)
         {
             InitializeComponent();
 
-            currencyTextBox.Location = new Point(48, 192);
+            this.home = home;
+
+            currencyTextBox.Location = new Point(48, 251);
             this.Controls.Add(currencyTextBox);
+
+            if (home.videoCaptureDevice.IsRunning)
+            {
+                home.videoCaptureDevice.SignalToStop();
+            }
         }
 
         private void AddSale_Load(object sender, EventArgs e)
@@ -117,7 +126,7 @@ namespace DepoApp.UI
                 db.Sales.Add(sale);
                 // Add Log
                 StorageItemLog storageItemLog = new StorageItemLog(existingStorageItem.id, sale.count, 2);
-                
+
                 if (db.SaveChanges() > 0 && storageItemLogManager.Add(storageItemLog))
                 {
                     MessageBox.Show("Satış başarıyla gerçekleştirildi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -144,7 +153,37 @@ namespace DepoApp.UI
             var selectedProduct = cmbBxProducts.SelectedValue;
             if (selectedProduct != null && selectedProduct.GetType() == typeof(int))
             {
-                label3.Text = db.Products.Where(p => p.id == (int) selectedProduct).FirstOrDefault().getMeasurementType() + ":";
+                label3.Text = db.Products.Where(p => p.id == (int)selectedProduct).FirstOrDefault().getMeasurementType() + ":";
+            }
+        }
+
+        private void txtBxBarcode_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).Text = "";
+            this.home.scannerTextBox = ((TextBox)sender);
+            this.home.videoCaptureDevice.Start();
+        }
+
+        private void AddSale_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (this.home.videoCaptureDevice.IsRunning)
+            {
+                this.home.videoCaptureDevice.SignalToStop();
+            }
+        }
+
+        private void txtBxBarcode_TextChanged(object sender, EventArgs e)
+        {
+            string barcode = ((TextBox)sender).Text.Trim();
+            Product product = db.Products.Where(p => p.barcode == barcode).FirstOrDefault();
+            if (product != null)
+            {
+                cmbBxProducts.SelectedValue = product.id;
+                StorageItem storageItem = db.StorageItems.Include(si => si.product).Include(si => si.storage).Where(si => si.product.id == product.id).FirstOrDefault();
+                if (storageItem != null)
+                {
+                    cmbBxStorages.SelectedValue = storageItem.storage.id;
+                }
             }
         }
     }

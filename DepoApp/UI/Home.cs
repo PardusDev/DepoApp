@@ -549,8 +549,6 @@ namespace DepoApp
         {
             ((TextBox)sender).Text = "";
             scannerTextBox = ((TextBox)sender);
-            videoCaptureDevice = new VideoCaptureDevice(filterInfoCollection[0].MonikerString);
-            videoCaptureDevice.NewFrame += VideoCaptureDevice_BarcodeFrame;
             videoCaptureDevice.Start();
         }
         #endregion
@@ -558,7 +556,7 @@ namespace DepoApp
         #region SALE
         private void button8_Click(object sender, EventArgs e)
         {
-            AddSale addSale = new AddSale();
+            AddSale addSale = new AddSale(this);
             addSale.ShowDialog();
 
             updateSalesDataGridView();
