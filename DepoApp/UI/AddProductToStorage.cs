@@ -157,8 +157,6 @@ namespace DepoApp.UI
             // TODO: When a barcode is found, the comboboxes will be arranged according to that product.
             ((TextBox)sender).Text = "";
             this.home.scannerTextBox = ((TextBox)sender);
-            this.home.videoCaptureDevice = new VideoCaptureDevice(this.home.filterInfoCollection[0].MonikerString);
-            this.home.videoCaptureDevice.NewFrame += this.home.VideoCaptureDevice_BarcodeFrame;
             this.home.videoCaptureDevice.Start();
         }
 
@@ -167,6 +165,16 @@ namespace DepoApp.UI
             if (this.home.videoCaptureDevice.IsRunning)
             {
                 this.home.videoCaptureDevice.SignalToStop();
+            }
+        }
+
+        private void txtBxBarcodeAddPrdToStorage_TextChanged(object sender, EventArgs e)
+        {
+            string barcode = ((TextBox)sender).Text.Trim();
+            Product product = db.Products.FirstOrDefault(p => p.barcode == barcode);
+            if (product != null)
+            {
+                cmbBxProducts.SelectedValue = product.id;
             }
         }
     }

@@ -139,7 +139,7 @@
             // 
             // button8
             // 
-            button8.Location = new Point(477, 375);
+            button8.Location = new Point(477, 421);
             button8.Name = "button8";
             button8.Size = new Size(121, 40);
             button8.TabIndex = 2;
@@ -154,7 +154,7 @@
             dataGridViewSales.AllowUserToOrderColumns = true;
             dataGridViewSales.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewSales.Columns.AddRange(new DataGridViewColumn[] { saleId, saleProduct, saleStorage, saleCount, salePrice });
-            dataGridViewSales.Location = new Point(0, 36);
+            dataGridViewSales.Location = new Point(0, 83);
             dataGridViewSales.Name = "dataGridViewSales";
             dataGridViewSales.ReadOnly = true;
             dataGridViewSales.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

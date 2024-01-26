@@ -101,7 +101,7 @@
             // cmbBxStorages
             // 
             cmbBxStorages.FormattingEnabled = true;
-            cmbBxStorages.Location = new Point(94, 114);
+            cmbBxStorages.Location = new Point(94, 132);
             cmbBxStorages.Name = "cmbBxStorages";
             cmbBxStorages.Size = new Size(183, 23);
             cmbBxStorages.TabIndex = 5;
@@ -109,7 +109,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(13, 117);
+            label3.Location = new Point(12, 135);
             label3.Name = "label3";
             label3.Size = new Size(73, 15);
             label3.TabIndex = 6;
@@ -138,7 +138,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(75, 143);
+            label6.Location = new Point(77, 111);
             label6.Name = "label6";
             label6.Size = new Size(197, 15);
             label6.TabIndex = 9;
@@ -161,6 +161,7 @@
             txtBxBarcodeAddPrdToStorage.Size = new Size(183, 23);
             txtBxBarcodeAddPrdToStorage.TabIndex = 11;
             txtBxBarcodeAddPrdToStorage.Click += txtBxBarcodeAddPrdToStorage_Click;
+            txtBxBarcodeAddPrdToStorage.TextChanged += txtBxBarcodeAddPrdToStorage_TextChanged;
             // 
             // AddProductToStorage
             // 

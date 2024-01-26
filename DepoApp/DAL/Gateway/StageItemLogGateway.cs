@@ -62,7 +62,7 @@ namespace DepoApp.DAL.Gateway
 
         public StorageItem getStorageItem(StorageItemLog storageItemLog)
         {
-            StorageItem storageItem = db.StorageItems.Include(si => si.product).FirstOrDefault(si => si.product.id == storageItemLog.storageItemId);
+            StorageItem storageItem = db.StorageItems.Include(si => si.product).FirstOrDefault(si => si.id == storageItemLog.storageItemId);
             if (storageItem != null)
                 return storageItem;
             else
