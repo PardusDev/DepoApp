@@ -105,13 +105,14 @@ namespace DepoApp.UI
                     db.StorageItems.Add(storageItem);
                     db.Products.Attach(storageItem.product);
                     db.Storages.Attach(storageItem.storage);
-
-                    // Add log
-                    StorageItemLog storageItemLog = new StorageItemLog(storageItem.id, storageItem.count, 1);
-                    if ((db.SaveChanges() > 0) && _storageItemLogManager.Add(storageItemLog))
+                    if ((db.SaveChanges() > 0))
                     {
-                        MessageBox.Show("Ürün başarıyla depoya eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        home.updateStorageItemDataGridView();
+                        StorageItemLog storageItemLog = new StorageItemLog(storageItem.id, storageItem.count, 1);
+                        if (_storageItemLogManager.Add(storageItemLog))
+                        {
+                            MessageBox.Show("Ürün başarıyla depoya eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            home.updateStorageItemDataGridView();
+                        }
                     }
                 }
                 catch (Exception exception)

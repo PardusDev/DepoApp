@@ -480,13 +480,28 @@ namespace DepoApp
 
         private void button3_Click(object sender, EventArgs e)
         {
+            // Check any row is selected
+            if (dataGridViewStorage.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Lütfen bir ürün seçiniz.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            StorageItem selectedStorageItem = getSelectedStorageItem();
+            // Check storage item is used in sales  
+            if (db.Sales.Where(s => s.storageItem.id == selectedStorageItem.id).FirstOrDefault() != null)
+            {
+                MessageBox.Show("Bu ürün satýþlarda kullanýlýyor. Veri kaybý olmamasý adýna bu iþlemi yapamazsýnýz.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             AreYouSure areYouSure = new AreYouSure();
 
             DialogResult dialogResult = areYouSure.ShowDialog();
 
             if (dialogResult == DialogResult.Yes)
             {
-                StorageItem selectedStorageItem = getSelectedStorageItem();
+                
 
                 try
                 {
