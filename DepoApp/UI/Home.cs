@@ -235,6 +235,7 @@ namespace DepoApp
                         dataGridViewStorages.SelectedRows[0].Cells[1].Value = storage.name;
                         updateStorageItemDataGridView();
                         updateStoragesComboBox();
+                        updateSalesTabStoragesComboBox();
                         updateSalesDataGridView();
                     }
                 }
@@ -391,7 +392,7 @@ namespace DepoApp
                         updateStorageItemDataGridView();
 
                         // Sales Tab
-                        // TODO: Sales tab's search filter
+                        updateSalesTabCategoriesComboBox();
                         updateSalesDataGridView();
                     }
                     else
@@ -501,7 +502,7 @@ namespace DepoApp
 
             if (dialogResult == DialogResult.Yes)
             {
-                
+
 
                 try
                 {
@@ -569,13 +570,61 @@ namespace DepoApp
         #endregion
 
         #region SALE
+
+
         private void button8_Click(object sender, EventArgs e)
         {
             AddSale addSale = new AddSale(this);
             addSale.ShowDialog();
 
+            // TODO: It's not efficient to update all the table
             updateSalesDataGridView();
             updateStorageItemDataGridView();
+        }
+
+        private void txtBxSalesTabBarcode_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).Text = "";
+            scannerTextBox = ((TextBox)sender);
+            videoCaptureDevice.Start();
+        }
+
+        // Search button in sale tab
+        private void button11_Click(object sender, EventArgs e)
+        {
+            // Attention: Search term is lowercased
+            string searchTerm = (txtBxSalesTabProductName.Text.Trim()).ToLower();
+            string barcode = (txtBxSalesTabBarcode.Text.Trim());
+            using (DepoDbContext db = new DepoDbContext())
+            {
+                var sales = db.Sales.Include(s => s.storageItem).Include(s => s.storageItem.product).Include(s => s.storageItem.product.category).Include(s => s.storageItem.storage).ToList();
+                if (searchTerm != "")
+                {
+                    sales = sales.Where(s => s.storageItem.product.name.ToLower().Contains(searchTerm)).ToList();
+                }
+
+                if ((int)cmbBxSalesTabStorages.SelectedValue != -1)
+                {
+                    sales = sales.Where(s => s.storageItem.storage.id == (int)cmbBxSalesTabStorages.SelectedValue).ToList();
+                }
+
+                if ((int)cmbBxSalesTabCategories.SelectedValue != -1)
+                {
+                    sales = sales.Where(s => s.storageItem.product.category.id == (int)cmbBxSalesTabCategories.SelectedValue).ToList();
+                }
+
+                if (barcode != "")
+                {
+                    sales = sales.Where(s => s.storageItem.product.barcode == barcode).ToList();
+                }
+
+                dataGridViewSales.Rows.Clear();
+
+                foreach (var sale in sales)
+                {
+                    dataGridViewSales.Rows.Add(sale.id, sale.storageItem.product.name, sale.storageItem.storage.name, sale.count + " " + sale.storageItem.product.getMeasurementType(), sale.price);
+                }
+            }
         }
         #endregion
 
@@ -634,6 +683,7 @@ namespace DepoApp
 
             }
             updateStoragesComboBox();
+            updateSalesTabStoragesComboBox();
         }
 
         public void updateStorageItemDataGridView()
@@ -667,6 +717,7 @@ namespace DepoApp
 
             updateCategoriesComboBox();
             updateCategoriesComboBoxProductsTab();
+            updateSalesTabCategoriesComboBox();
         }
 
         public void updateSalesDataGridView()
@@ -740,6 +791,43 @@ namespace DepoApp
             }
         }
 
+        // Sales Tab
+        public void updateSalesTabStoragesComboBox()
+        {
+            List<Storage> storages = new List<Storage>();
+            storages.Add(new Storage()
+            {
+                id = -1,
+                name = "Tüm Depolar"
+            });
+            using (DepoDbContext db = new DepoDbContext())
+            {
+                storages.AddRange(db.Storages.OrderBy(s => s.id).ToList());
+
+                cmbBxSalesTabStorages.DataSource = storages;
+                cmbBxSalesTabStorages.DisplayMember = "name";
+                cmbBxSalesTabStorages.ValueMember = "id";
+            }
+        }
+
+        public void updateSalesTabCategoriesComboBox()
+        {
+            List<Category> categories = new List<Category>();
+            categories.Add(new Category()
+            {
+                id = -1,
+                name = "Tüm Kategoriler"
+            });
+            using (DepoDbContext db = new DepoDbContext())
+            {
+                categories.AddRange(db.Categories.OrderBy(c => c.id).ToList());
+
+                cmbBxSalesTabCategories.DataSource = categories;
+                cmbBxSalesTabCategories.DisplayMember = "name";
+                cmbBxSalesTabCategories.ValueMember = "id";
+            }
+        }
+
         public void VideoCaptureDevice_BarcodeFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
         {
             Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
@@ -756,6 +844,8 @@ namespace DepoApp
                 }));
             }
         }
+
+
         #endregion
 
 
@@ -766,6 +856,8 @@ namespace DepoApp
 
 
 
-    
+
+
+        
     }
 }

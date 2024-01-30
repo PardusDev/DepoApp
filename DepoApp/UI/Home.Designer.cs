@@ -31,6 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             tabControl1 = new TabControl();
             tabPage5 = new TabPage();
+            txtBxSalesTabBarcode = new TextBox();
+            button11 = new Button();
+            cmbBxSalesTabCategories = new ComboBox();
+            cmbBxSalesTabStorages = new ComboBox();
+            txtBxSalesTabProductName = new TextBox();
+            label11 = new Label();
             button8 = new Button();
             dataGridViewSales = new DataGridView();
             saleId = new DataGridViewTextBoxColumn();
@@ -127,10 +133,53 @@
             // tabPage5
             // 
             resources.ApplyResources(tabPage5, "tabPage5");
+            tabPage5.Controls.Add(txtBxSalesTabBarcode);
+            tabPage5.Controls.Add(button11);
+            tabPage5.Controls.Add(cmbBxSalesTabCategories);
+            tabPage5.Controls.Add(cmbBxSalesTabStorages);
+            tabPage5.Controls.Add(txtBxSalesTabProductName);
+            tabPage5.Controls.Add(label11);
             tabPage5.Controls.Add(button8);
             tabPage5.Controls.Add(dataGridViewSales);
             tabPage5.Name = "tabPage5";
             tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // txtBxSalesTabBarcode
+            // 
+            resources.ApplyResources(txtBxSalesTabBarcode, "txtBxSalesTabBarcode");
+            txtBxSalesTabBarcode.Name = "txtBxSalesTabBarcode";
+            txtBxSalesTabBarcode.Click += txtBxSalesTabBarcode_Click;
+            // 
+            // button11
+            // 
+            resources.ApplyResources(button11, "button11");
+            button11.Name = "button11";
+            button11.UseVisualStyleBackColor = true;
+            button11.Click += button11_Click;
+            // 
+            // cmbBxSalesTabCategories
+            // 
+            resources.ApplyResources(cmbBxSalesTabCategories, "cmbBxSalesTabCategories");
+            cmbBxSalesTabCategories.FormattingEnabled = true;
+            cmbBxSalesTabCategories.Items.AddRange(new object[] { resources.GetString("cmbBxSalesTabCategories.Items") });
+            cmbBxSalesTabCategories.Name = "cmbBxSalesTabCategories";
+            // 
+            // cmbBxSalesTabStorages
+            // 
+            resources.ApplyResources(cmbBxSalesTabStorages, "cmbBxSalesTabStorages");
+            cmbBxSalesTabStorages.FormattingEnabled = true;
+            cmbBxSalesTabStorages.Items.AddRange(new object[] { resources.GetString("cmbBxSalesTabStorages.Items") });
+            cmbBxSalesTabStorages.Name = "cmbBxSalesTabStorages";
+            // 
+            // txtBxSalesTabProductName
+            // 
+            resources.ApplyResources(txtBxSalesTabProductName, "txtBxSalesTabProductName");
+            txtBxSalesTabProductName.Name = "txtBxSalesTabProductName";
+            // 
+            // label11
+            // 
+            resources.ApplyResources(label11, "label11");
+            label11.Name = "label11";
             // 
             // button8
             // 
@@ -618,6 +667,7 @@
             Load += Home_Load;
             tabControl1.ResumeLayout(false);
             tabPage5.ResumeLayout(false);
+            tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSales).EndInit();
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
@@ -710,5 +760,11 @@
         private DataGridViewTextBoxColumn productNameStorage;
         private DataGridViewTextBoxColumn countProductStorage;
         private DataGridViewTextBoxColumn storageItemStorageName;
+        private Label label11;
+        private TextBox txtBxSalesTabProductName;
+        private Button button11;
+        private ComboBox cmbBxSalesTabCategories;
+        private ComboBox cmbBxSalesTabStorages;
+        private TextBox txtBxSalesTabBarcode;
     }
 }
