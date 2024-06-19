@@ -73,3 +73,10 @@ git clone https://github.com/PardusDev/DepoApp.git
 ## Usage
 
 Download the built program and open it by double-clicking on the 'exe' file. There you go! Now you can use the application.
+
+## Contact
+
+You can reach me at:
+
+- **Email:** [rustemavci@hotmail.com.tr](mailto:rustemavci@hotmail.com.tr)
+- **LinkedIn:** [LinkedIn](https://www.linkedin.com/in/rüstem-avcı)
